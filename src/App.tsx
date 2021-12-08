@@ -586,7 +586,7 @@ function GameWaitingRoom() {
 }
 
 function Player(props: any) {
-  const { name, uid, ready, inGame } = props.info;
+  const { name, uid, ready, inGame, role } = props.info;
   const admin = props.isAdmin;
   const playersRef = firestore.collection("players");
   const currentPlayerRef = playersRef.doc(uid);
@@ -612,7 +612,9 @@ function Player(props: any) {
         <Text fontWeight={auth.currentUser?.uid === uid ? "600" : "400"}>
           {name} {admin && <EditIcon onClick={onOpen} />}
         </Text>
-        {inGame ? (
+        {role === "dq" ? (
+          <Text color="red.600">Diskvalifikuotas</Text>
+        ) : inGame ? (
           <Text color="green.600">Jau žaidžia</Text>
         ) : ready ? (
           <Text color="green.600">Pasiruošęs</Text>
