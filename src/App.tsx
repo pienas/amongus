@@ -131,7 +131,13 @@ function GameWaitingRoom() {
       setImpostersWin(false);
     }
   }, [currentPlayer]);
-  if (!players || !playersReady || !currentPlayer || !playersInGame) {
+  if (
+    !players ||
+    !playersReady ||
+    !currentPlayer ||
+    !playersInGame ||
+    !allPlayers
+  ) {
     return <Box>Kraunama...</Box>;
   }
   const completeEasyTask = async (id: number) => {
@@ -306,8 +312,8 @@ function GameWaitingRoom() {
             Žaidėjai ({playersReady?.length} / {players.length})
           </Text>
           <Player info={currentPlayer} isAdmin={isCurrentPlayerAdmin} />
-          {players &&
-            players.map((player: any, index: number) => {
+          {allPlayers &&
+            allPlayers.map((player: any, index: number) => {
               if (currentPlayerIndex !== index)
                 return (
                   <Player
