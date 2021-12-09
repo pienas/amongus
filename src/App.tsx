@@ -25,6 +25,7 @@ import {
 } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
 import { useState, useEffect } from "react";
+import Countdown from "react-countdown";
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -270,7 +271,7 @@ function GameWaitingRoom() {
       const shuffledEasyTasks = easyTasks.sort(() => 0.5 - Math.random());
       const shuffledMediumTasks = mediumTasks.sort(() => 0.5 - Math.random());
       const shuffledHardTasks = hardTasks.sort(() => 0.5 - Math.random());
-      const allPlayers = await playersRef.where("role", "!=", "dq").get();
+      const allPlayers = await playersRef.get();
       var imposters = 4;
       allPlayers.forEach((doc) => {
         batch.update(allPlayersRef.doc(doc.id), {
@@ -653,8 +654,16 @@ function PlayerInGame(props: any) {
   const playersRef = firestore.collection("players");
   const currentPlayerRef = playersRef.doc(auth.currentUser?.uid);
   const [currentPlayer]: any = useDocument(currentPlayerRef);
-  const kickPlayer = async (uid: string) => {
-    const playerRef = firestore.collection("players").doc(uid);
+  const [cooldown, setCooldown] = useState(0);
+  useEffect(() => {
+    setCooldown(
+      currentPlayer?.data().cooldownEndsAt - Date.now() > 0
+        ? currentPlayer?.data().cooldownEndsAt - Date.now()
+        : 0
+    );
+  }, [currentPlayer]);
+  const kickPlayer = async (userid: string) => {
+    const playerRef = firestore.collection("players").doc(userid);
     await playerRef.update({
       inGame: false,
       ready: false,
@@ -662,10 +671,34 @@ function PlayerInGame(props: any) {
       screenHidden: false,
     });
   };
+  const killPlayer = async (userid: string) => {
+    await currentPlayerRef.update({
+      cooldownEndsAt: Date.now() + 90000,
+    });
+    setCooldown(90000);
+    setCurrentTimeIndex(currentTimeIndex + 1);
+    const playerRef = firestore.collection("players").doc(userid);
+    await playerRef.update({
+      isDead: true,
+    });
+  };
+  const [currentTimeIndex, setCurrentTimeIndex] = useState(0);
+  // console.log(
+  //   Date.now() + cooldown,
+  //   currentPlayer?.data().cooldownEndsAt - Date.now(),
+  //   cooldown
+  // );
   return (
     <>
       <Flex alignItems="center" justifyContent="space-between" mb={2}>
-        <Text fontWeight={auth.currentUser?.uid === uid ? "600" : "400"}>
+        <Text
+          fontWeight={auth.currentUser?.uid === uid ? "600" : "400"}
+          color={
+            currentPlayer?.data().role === "admin" && isDead
+              ? "red.600"
+              : "black"
+          }
+        >
           {name}
         </Text>
         {auth.currentUser?.uid !== uid &&
@@ -678,7 +711,18 @@ function PlayerInGame(props: any) {
           ) : isDead ? (
             <Text color="red.600">Žaidėjas miręs</Text>
           ) : (
-            <Text color="red.600">Nužudyti</Text>
+            <Countdown
+              date={Date.now() + cooldown}
+              key={currentTimeIndex}
+              // onTick={() => setCooldown(cooldown - 1000)}
+              // intervalDelay={1000}
+              // precision={0}
+              // renderer={(props) => <>{props.total / 1000} sek.</>}
+            >
+              <Text color="red.600" onClick={() => killPlayer(uid)}>
+                Nužudyti
+              </Text>
+            </Countdown>
           ))}
       </Flex>
     </>
