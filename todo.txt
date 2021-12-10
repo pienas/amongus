@@ -16,6 +16,13 @@ Negalima begioti
 Mire nesneka per emergency meeting
 Nuzudyti zaideja galima numusus kepure
 Numusta kepure turi likti toje vietoje kur igulos narys buvo nuzudytas
+tureti qr skeneri
+netikrint asmeniniu daiktu
 
 todo:
 resetgame - nuimti komentara nuo ready
+
+galima pranesti apie mirusi zaideja po meeting
+ne visiem duoda uzduotis
+diskvalifikavus tikrint laimejima
+nesibaigia sabotage ivedus koda

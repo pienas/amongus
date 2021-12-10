@@ -1025,6 +1025,15 @@ function GameWaitingRoom() {
           doneTasks: 0,
           cooldownEndsAt: Date.now() + 180000,
         });
+        console.log(
+          tasksLeft1 > 0
+            ? shuffledEasyTasks1.slice(0, 3)
+            : tasksLeft2 > 0
+            ? shuffledEasyTasks2.slice(0, 3)
+            : tasksLeft3 > 0
+            ? shuffledEasyTasks3.slice(0, 3)
+            : shuffledEasyTasks4.slice(0, 3)
+        );
         if (tasksLeft1 > 0) {
           shuffledEasyTasks1.splice(0, 3);
           shuffledMediumTasks1.splice(0, 2);
@@ -1546,7 +1555,7 @@ function GameWaitingRoom() {
             borderRadius="5px"
             mb={2}
           />
-          {currentPlayer.role === "crewmate" ? (
+          {currentPlayer.role === "crewmate" && !currentPlayer.isDead ? (
             <>
               <Button
                 colorScheme="blue"
@@ -1556,7 +1565,9 @@ function GameWaitingRoom() {
                 disabled={meetingCooldown > 0}
                 _focus={{ boxShadow: "none" }}
               >
-                Šaukti susirinkimą
+                {meetingCooldown > 0
+                  ? moment(meetingCooldown - 3 * 60 * 60 * 1000).format("mm:ss")
+                  : "Šaukti susirinkimą"}
               </Button>
               <Modal
                 isOpen={isMeetingStartPlayerOpen}
@@ -2724,7 +2735,7 @@ function PlayerInGame(props: any) {
           ) : isDead ? (
             <Text color="red.600">Žaidėjas miręs</Text>
           ) : role !== "imposter" ? (
-            countdown > 0 ? (
+            !currentPlayer?.data().isDead && countdown > 0 ? (
               <Text color="red.600">
                 {moment(countdown - 3 * 60 * 60 * 1000).format("mm:ss")}
               </Text>
