@@ -551,10 +551,10 @@ function GameWaitingRoom() {
     setOxygenFirstDone(true);
     onOxygenFirstClose();
     setOxygenFirst("");
-    if (currentPlayer.isOxygenSecondDone) {
+    if (currentPlayer?.isOxygenSecondDone) {
       const secondBatch = firestore.batch();
       allPlayers.forEach((doc) => {
-        batch.update(allPlayersRef.doc(doc.id), {
+        secondBatch.update(allPlayersRef.doc(doc.id), {
           isSabotaged: false,
           sabotageType: "",
           sabotageEndsAt: Date.now() + 2592000000,
@@ -580,10 +580,10 @@ function GameWaitingRoom() {
     setOxygenSecondDone(true);
     onOxygenSecondClose();
     setOxygenSecond("");
-    if (currentPlayer.isOxygenFirstDone) {
+    if (currentPlayer?.isOxygenFirstDone) {
       const secondBatch = firestore.batch();
       allPlayers.forEach((doc) => {
-        batch.update(allPlayersRef.doc(doc.id), {
+        secondBatch.update(allPlayersRef.doc(doc.id), {
           isSabotaged: false,
           sabotageType: "",
           sabotageEndsAt: Date.now() + 2592000000,
@@ -875,25 +875,25 @@ function GameWaitingRoom() {
           code: 849024,
         },
         {
-          task: "Raskite paslėptą daiktą 2 kambaryje. Daiktas raudonos spalvos, labai lengvas ir iš plastiko. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 96489.",
+          task: "Raskite paslėptą daiktą 2 kambaryje. Daiktas raudonos spalvos, labai lengvas ir iš plastiko. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 96489.",
           done: false,
           id: 37,
           code: 578934,
         },
         {
-          task: "Raskite paslėptą daiktą virtuvėje. Daiktas žalios spalvos, šiltas ir minkštas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 54698.",
+          task: "Raskite paslėptą daiktą virtuvėje. Daiktas žalios spalvos, šiltas ir minkštas. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 54698.",
           done: false,
           id: 38,
           code: 492282,
         },
         {
-          task: "Raskite paslėptą daiktą 8 kambaryje. Daiktas mėlynos spalvos, popierinis. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 87456.",
+          task: "Raskite paslėptą daiktą 8 kambaryje. Daiktas mėlynos spalvos, popierinis. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 87456.",
           done: false,
           id: 39,
           code: 87456,
         },
         {
-          task: "Apsirenkite šiltai. Raskite paslėptą daiktą prie vienos iš mašinų. Daiktas raudonos spalvos, pailgas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 42013.",
+          task: "Apsirenkite šiltai. Raskite paslėptą daiktą prie vienos iš mašinų. Daiktas raudonos spalvos, pailgas. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 42013.",
           done: false,
           id: 40,
           code: 252078,
@@ -1169,25 +1169,25 @@ function GameWaitingRoom() {
           code: 849024,
         },
         {
-          task: "Raskite paslėptą daiktą 2 kambaryje. Daiktas raudonos spalvos, labai lengvas ir iš plastiko. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 96489.",
+          task: "Raskite paslėptą daiktą 2 kambaryje. Daiktas raudonos spalvos, labai lengvas ir iš plastiko. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 96489.",
           done: false,
           id: 37,
           code: 578934,
         },
         {
-          task: "Raskite paslėptą daiktą virtuvėje. Daiktas žalios spalvos, šiltas ir minkštas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 54698.",
+          task: "Raskite paslėptą daiktą virtuvėje. Daiktas žalios spalvos, šiltas ir minkštas. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 54698.",
           done: false,
           id: 38,
           code: 492282,
         },
         {
-          task: "Raskite paslėptą daiktą 8 kambaryje. Daiktas mėlynos spalvos, popierinis. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 87456.",
+          task: "Raskite paslėptą daiktą 8 kambaryje. Daiktas mėlynos spalvos, popierinis. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 87456.",
           done: false,
           id: 39,
           code: 87456,
         },
         {
-          task: "Apsirenkite šiltai. Raskite paslėptą daiktą prie vienos iš mašinų. Daiktas raudonos spalvos, pailgas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 42013.",
+          task: "Apsirenkite šiltai. Raskite paslėptą daiktą prie vienos iš mašinų. Daiktas raudonos spalvos, pailgas. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 42013.",
           done: false,
           id: 40,
           code: 252078,
@@ -1463,25 +1463,25 @@ function GameWaitingRoom() {
           code: 849024,
         },
         {
-          task: "Raskite paslėptą daiktą 2 kambaryje. Daiktas raudonos spalvos, labai lengvas ir iš plastiko. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 96489.",
+          task: "Raskite paslėptą daiktą 2 kambaryje. Daiktas raudonos spalvos, labai lengvas ir iš plastiko. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 96489.",
           done: false,
           id: 37,
           code: 578934,
         },
         {
-          task: "Raskite paslėptą daiktą virtuvėje. Daiktas žalios spalvos, šiltas ir minkštas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 54698.",
+          task: "Raskite paslėptą daiktą virtuvėje. Daiktas žalios spalvos, šiltas ir minkštas. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 54698.",
           done: false,
           id: 38,
           code: 492282,
         },
         {
-          task: "Raskite paslėptą daiktą 8 kambaryje. Daiktas mėlynos spalvos, popierinis. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 87456.",
+          task: "Raskite paslėptą daiktą 8 kambaryje. Daiktas mėlynos spalvos, popierinis. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 87456.",
           done: false,
           id: 39,
           code: 87456,
         },
         {
-          task: "Apsirenkite šiltai. Raskite paslėptą daiktą prie vienos iš mašinų. Daiktas raudonos spalvos, pailgas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 42013.",
+          task: "Apsirenkite šiltai. Raskite paslėptą daiktą prie vienos iš mašinų. Daiktas raudonos spalvos, pailgas. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 42013.",
           done: false,
           id: 40,
           code: 252078,
@@ -1757,25 +1757,25 @@ function GameWaitingRoom() {
           code: 849024,
         },
         {
-          task: "Raskite paslėptą daiktą 2 kambaryje. Daiktas raudonos spalvos, labai lengvas ir iš plastiko. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 96489.",
+          task: "Raskite paslėptą daiktą 2 kambaryje. Daiktas raudonos spalvos, labai lengvas ir iš plastiko. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 96489.",
           done: false,
           id: 37,
           code: 578934,
         },
         {
-          task: "Raskite paslėptą daiktą virtuvėje. Daiktas žalios spalvos, šiltas ir minkštas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 54698.",
+          task: "Raskite paslėptą daiktą virtuvėje. Daiktas žalios spalvos, šiltas ir minkštas. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 54698.",
           done: false,
           id: 38,
           code: 492282,
         },
         {
-          task: "Raskite paslėptą daiktą 8 kambaryje. Daiktas mėlynos spalvos, popierinis. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 87456.",
+          task: "Raskite paslėptą daiktą 8 kambaryje. Daiktas mėlynos spalvos, popierinis. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 87456.",
           done: false,
           id: 39,
           code: 87456,
         },
         {
-          task: "Apsirenkite šiltai. Raskite paslėptą daiktą prie vienos iš mašinų. Daiktas raudonos spalvos, pailgas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 42013.",
+          task: "Apsirenkite šiltai. Raskite paslėptą daiktą prie vienos iš mašinų. Daiktas raudonos spalvos, pailgas. Užduoties kodas - daikto pavadinimo ilgis padaugintas iš 42013.",
           done: false,
           id: 40,
           code: 252078,
@@ -2094,12 +2094,42 @@ function GameWaitingRoom() {
     await batch.commit();
     setGamePaused(true);
   };
+  const startMeetingStarting = async () => {
+    if (currentPlayer.isSabotaged) {
+      toast({
+        title: "Susirinkimas nepradėtas",
+        description:
+          "Susirinkimas negali būti pradėtas nes šiuo metu vyksta sabotažas.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } else {
+      const deadCrewmatesRef = firestore
+        .collection("players")
+        .where("role", "==", "crewmate")
+        .where("isDead", "==", true)
+        .where("isReported", "==", false);
+      const deadCrewmates = await deadCrewmatesRef.get();
+      const deadCrewmatesBatch = firestore.batch();
+      deadCrewmates.forEach((doc) => {
+        deadCrewmatesBatch.update(allPlayersRef.doc(doc.id), {
+          isReported: true,
+        });
+      });
+      await deadCrewmatesBatch.commit();
+      const batch = firestore.batch();
+      const allPlayers = await playersRef.get();
+      allPlayers.forEach((doc) => {
+        batch.update(allPlayersRef.doc(doc.id), {
+          isMeetingStarting: true,
+        });
+      });
+      await batch.commit();
+      setMeetingStarting(true);
+    }
+  };
   const startMeeting = async () => {
-    const deadCrewmatesRef = firestore
-      .collection("players")
-      .where("role", "==", "crewmate")
-      .where("isDead", "==", true)
-      .where("isReported", "==", false);
     const batch = firestore.batch();
     const allPlayers = await playersRef.get();
     allPlayers.forEach((doc) => {
@@ -2108,14 +2138,6 @@ function GameWaitingRoom() {
         isMeetingStarted: true,
       });
     });
-    const deadCrewmates = await deadCrewmatesRef.get();
-    const deadCrewmatesBatch = firestore.batch();
-    deadCrewmates.forEach((doc) => {
-      deadCrewmatesBatch.update(allPlayersRef.doc(doc.id), {
-        isReported: true,
-      });
-    });
-    await deadCrewmatesBatch.commit();
     await batch.commit();
     setMeetingStarting(false);
     setMeetingStarted(true);
@@ -2137,21 +2159,37 @@ function GameWaitingRoom() {
     setMeetingCooldown(Date.now() + 120000);
   };
   const startSabotage = async (type: string) => {
-    const batch = firestore.batch();
-    const allPlayers = await playersRef.get();
-    allPlayers.forEach((doc) => {
-      batch.update(allPlayersRef.doc(doc.id), {
-        isSabotaged: true,
-        sabotageType: type,
-        sabotageEndsAt: type === "oxygen" ? Date.now() + 90000 : Date.now(),
-        sabotageCooldownEndsAt: Date.now() + 180000,
+    if (currentPlayer?.isSabotaged) {
+      toast({
+        title: "Sabotažas nepradėtas",
+        description:
+          "Sabotažas negali būti pradėtas nes kitas sabotažas jau buvo pradėtas.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
       });
-    });
-    await batch.commit();
-    setGameSabotaged(true);
-    setGameSabotageType(type);
-    setGameSabotageEndsAt(type === "oxygen" ? Date.now() + 90000 : Date.now());
-    setSabotageCooldownEndsAt(Date.now() + 180000);
+    } else {
+      const batch = firestore.batch();
+      const allPlayers = await playersRef.get();
+      allPlayers.forEach((doc) => {
+        batch.update(allPlayersRef.doc(doc.id), {
+          isSabotaged: true,
+          sabotageType: type,
+          sabotageEndsAt: type === "oxygen" ? Date.now() + 90000 : Date.now(),
+          sabotageCooldownEndsAt: Date.now() + 180000,
+          isCommsDone: false,
+          isOxygenFirstDone: false,
+          isOxygenSecondDone: false,
+        });
+      });
+      await batch.commit();
+      setGameSabotaged(true);
+      setGameSabotageType(type);
+      setGameSabotageEndsAt(
+        type === "oxygen" ? Date.now() + 90000 : Date.now()
+      );
+      setSabotageCooldownEndsAt(Date.now() + 180000);
+    }
   };
   return (
     <>
@@ -2315,26 +2353,25 @@ function GameWaitingRoom() {
           <Text mt={4} fontSize="20px" textAlign="center" color="red.600">
             Vyksta susirinkimas
           </Text>
+          <Text fontWeight="600" fontSize="30px" mt={6} mb={2}>
+            Žaidėjai:
+          </Text>
+          {playersInGame &&
+            playersInGame.map((player: any, index: number) => {
+              if (currentPlayerIndex !== index)
+                if (player.role !== "admin")
+                  return (
+                    <PlayerInGameInMeeting
+                      key={player.id}
+                      info={player}
+                      setWinImposters={setWinImposters}
+                      setWinCrewmates={setWinCrewmates}
+                      isAdmin={isCurrentPlayerAdmin}
+                    />
+                  );
+            })}
           {isCurrentPlayerAdmin && (
             <>
-              <Text fontWeight="600" fontSize="30px" mt={6} mb={2}>
-                Žaidėjai:
-              </Text>
-              {playersInGame &&
-                playersInGame.map((player: any, index: number) => {
-                  if (currentPlayerIndex !== index)
-                    if (player.role !== "admin")
-                      return (
-                        <PlayerInGame
-                          key={player.id}
-                          info={player}
-                          setWinImposters={setWinImposters}
-                          setWinCrewmates={setWinCrewmates}
-                          setMeetStarting={setMeetStarting}
-                          isAdmin={isCurrentPlayerAdmin}
-                        />
-                      );
-                })}
               <Button mt={3} onClick={onMeetingEndOpen} colorScheme="blue">
                 Užbaigti susirinkimą
               </Button>
@@ -2535,7 +2572,7 @@ function GameWaitingRoom() {
                 width="100%"
                 my={3}
                 onClick={onMeetingStartPlayerOpen}
-                disabled={meetingCooldown > 0}
+                disabled={meetingCooldown > 0 || gameSabotaged}
                 _focus={{ boxShadow: "none" }}
               >
                 {meetingCooldown > 0
@@ -2560,7 +2597,7 @@ function GameWaitingRoom() {
                       mr={3}
                       _focus={{ boxShadow: "none" }}
                       onClick={() => {
-                        startMeeting();
+                        startMeetingStarting();
                         onMeetingStartPlayerClose();
                       }}
                     >
@@ -2845,177 +2882,389 @@ function GameWaitingRoom() {
               ) : (
                 ""
               )}
-              <Text fontWeight="500" fontSize="16px">
-                Lengvos užduotys:
-              </Text>
-              <OrderedList fontSize="14px">
-                {currentPlayer.easyTasks.map((task: any) => (
-                  <ListItem key={task.id}>
-                    <Flex justifyContent="space-between" alignItems="center">
-                      <Text>{task.task}</Text>
-                      <Text
-                        color={task.done ? "black" : "blue.500"}
-                        onClick={() => {
-                          setCurrentTaskId(task.id);
-                          onEasyTaskCodeOpen();
-                        }}
-                        whiteSpace="nowrap"
-                        pl={1}
-                      >
-                        {task.done ? "Užduotis atlikta" : "Įvesti kodą"}
-                      </Text>
-                      <Modal
-                        isOpen={isEasyTaskCodeOpen}
-                        onClose={onEasyTaskCodeClose}
-                      >
-                        <ModalOverlay />
-                        <ModalContent>
-                          <ModalHeader>Užduoties užbaigimas</ModalHeader>
-                          <ModalCloseButton />
-                          <ModalBody>
-                            Įveskite užduoties kodą:
-                            <Input
-                              type="number"
-                              value={easyTaskCode}
-                              onChange={handleEasyTaskCodeChange}
-                              placeholder="Užduoties kodas"
-                            />
-                          </ModalBody>
-                          <ModalFooter>
-                            <Button
-                              colorScheme="blue"
-                              mr={3}
-                              onClick={() => checkEasyTaskCode(currentTaskId)}
+              {currentPlayer.sabotageType === "comms" ? (
+                currentPlayer.isDead ? (
+                  <>
+                    <Text fontWeight="500" fontSize="16px">
+                      Lengvos užduotys:
+                    </Text>
+                    <OrderedList fontSize="14px">
+                      {currentPlayer.easyTasks.map((task: any) => (
+                        <ListItem key={task.id}>
+                          <Flex
+                            justifyContent="space-between"
+                            alignItems="center"
+                          >
+                            <Text>{task.task}</Text>
+                            <Text
+                              color={task.done ? "black" : "blue.500"}
+                              onClick={() => {
+                                setCurrentTaskId(task.id);
+                                onEasyTaskCodeOpen();
+                              }}
+                              whiteSpace="nowrap"
+                              pl={1}
                             >
-                              Patvirtinti
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              onClick={onEasyTaskCodeClose}
+                              {task.done ? "Užduotis atlikta" : "Įvesti kodą"}
+                            </Text>
+                            <Modal
+                              isOpen={isEasyTaskCodeOpen}
+                              onClose={onEasyTaskCodeClose}
                             >
-                              Atšaukti
-                            </Button>
-                          </ModalFooter>
-                        </ModalContent>
-                      </Modal>
-                    </Flex>
-                  </ListItem>
-                ))}
-              </OrderedList>
-              <Text fontWeight="500" fontSize="16px" mt={2}>
-                Vidutinio sunkumo užduotys:
-              </Text>
-              <OrderedList fontSize="14px">
-                {currentPlayer.mediumTasks.map((task: any) => (
-                  <ListItem key={task.id}>
-                    <Flex justifyContent="space-between" alignItems="center">
-                      <Text>{task.task}</Text>
-                      <Text
-                        color={task.done ? "black" : "blue.500"}
-                        onClick={() => {
-                          setCurrentTaskId(task.id);
-                          onMediumTaskCodeOpen();
-                        }}
-                        whiteSpace="nowrap"
-                        pl={1}
-                      >
-                        {task.done ? "Užduotis atlikta" : "Įvesti kodą"}
-                      </Text>
-                      <Modal
-                        isOpen={isMediumTaskCodeOpen}
-                        onClose={onMediumTaskCodeClose}
-                      >
-                        <ModalOverlay />
-                        <ModalContent>
-                          <ModalHeader>Užduoties užbaigimas</ModalHeader>
-                          <ModalCloseButton />
-                          <ModalBody>
-                            Įveskite užduoties kodą:
-                            <Input
-                              type="number"
-                              value={mediumTaskCode}
-                              onChange={handleMediumTaskCodeChange}
-                              placeholder="Užduoties kodas"
-                            />
-                          </ModalBody>
-                          <ModalFooter>
-                            <Button
-                              colorScheme="blue"
-                              mr={3}
-                              onClick={() => checkMediumTaskCode(currentTaskId)}
+                              <ModalOverlay />
+                              <ModalContent>
+                                <ModalHeader>Užduoties užbaigimas</ModalHeader>
+                                <ModalCloseButton />
+                                <ModalBody>
+                                  Įveskite užduoties kodą:
+                                  <Input
+                                    type="number"
+                                    value={easyTaskCode}
+                                    onChange={handleEasyTaskCodeChange}
+                                    placeholder="Užduoties kodas"
+                                  />
+                                </ModalBody>
+                                <ModalFooter>
+                                  <Button
+                                    colorScheme="blue"
+                                    mr={3}
+                                    onClick={() =>
+                                      checkEasyTaskCode(currentTaskId)
+                                    }
+                                  >
+                                    Patvirtinti
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    onClick={onEasyTaskCodeClose}
+                                  >
+                                    Atšaukti
+                                  </Button>
+                                </ModalFooter>
+                              </ModalContent>
+                            </Modal>
+                          </Flex>
+                        </ListItem>
+                      ))}
+                    </OrderedList>
+                    <Text fontWeight="500" fontSize="16px" mt={2}>
+                      Vidutinio sunkumo užduotys:
+                    </Text>
+                    <OrderedList fontSize="14px">
+                      {currentPlayer.mediumTasks.map((task: any) => (
+                        <ListItem key={task.id}>
+                          <Flex
+                            justifyContent="space-between"
+                            alignItems="center"
+                          >
+                            <Text>{task.task}</Text>
+                            <Text
+                              color={task.done ? "black" : "blue.500"}
+                              onClick={() => {
+                                setCurrentTaskId(task.id);
+                                onMediumTaskCodeOpen();
+                              }}
+                              whiteSpace="nowrap"
+                              pl={1}
                             >
-                              Patvirtinti
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              onClick={onMediumTaskCodeClose}
+                              {task.done ? "Užduotis atlikta" : "Įvesti kodą"}
+                            </Text>
+                            <Modal
+                              isOpen={isMediumTaskCodeOpen}
+                              onClose={onMediumTaskCodeClose}
                             >
-                              Atšaukti
-                            </Button>
-                          </ModalFooter>
-                        </ModalContent>
-                      </Modal>
-                    </Flex>
-                  </ListItem>
-                ))}
-              </OrderedList>
-              <Text fontWeight="500" fontSize="16px" mt={2}>
-                Sunkios užduotys:
-              </Text>
-              <OrderedList fontSize="14px">
-                {currentPlayer.hardTasks.map((task: any) => (
-                  <ListItem key={task.id}>
-                    <Flex justifyContent="space-between" alignItems="center">
-                      <Text>{task.task}</Text>
-                      <Text
-                        color={task.done ? "black" : "blue.500"}
-                        onClick={() => {
-                          setCurrentTaskId(task.id);
-                          onHardTaskCodeOpen();
-                        }}
-                        whiteSpace="nowrap"
-                        pl={1}
-                      >
-                        {task.done ? "Užduotis atlikta" : "Įvesti kodą"}
-                      </Text>
-                      <Modal
-                        isOpen={isHardTaskCodeOpen}
-                        onClose={onHardTaskCodeClose}
-                      >
-                        <ModalOverlay />
-                        <ModalContent>
-                          <ModalHeader>Užduoties užbaigimas</ModalHeader>
-                          <ModalCloseButton />
-                          <ModalBody>
-                            Įveskite užduoties kodą:
-                            <Input
-                              type="number"
-                              value={hardTaskCode}
-                              onChange={handleHardTaskCodeChange}
-                              placeholder="Užduoties kodas"
-                            />
-                          </ModalBody>
-                          <ModalFooter>
-                            <Button
-                              colorScheme="blue"
-                              mr={3}
-                              onClick={() => checkHardTaskCode(currentTaskId)}
+                              <ModalOverlay />
+                              <ModalContent>
+                                <ModalHeader>Užduoties užbaigimas</ModalHeader>
+                                <ModalCloseButton />
+                                <ModalBody>
+                                  Įveskite užduoties kodą:
+                                  <Input
+                                    type="number"
+                                    value={mediumTaskCode}
+                                    onChange={handleMediumTaskCodeChange}
+                                    placeholder="Užduoties kodas"
+                                  />
+                                </ModalBody>
+                                <ModalFooter>
+                                  <Button
+                                    colorScheme="blue"
+                                    mr={3}
+                                    onClick={() =>
+                                      checkMediumTaskCode(currentTaskId)
+                                    }
+                                  >
+                                    Patvirtinti
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    onClick={onMediumTaskCodeClose}
+                                  >
+                                    Atšaukti
+                                  </Button>
+                                </ModalFooter>
+                              </ModalContent>
+                            </Modal>
+                          </Flex>
+                        </ListItem>
+                      ))}
+                    </OrderedList>
+                    <Text fontWeight="500" fontSize="16px" mt={2}>
+                      Sunkios užduotys:
+                    </Text>
+                    <OrderedList fontSize="14px">
+                      {currentPlayer.hardTasks.map((task: any) => (
+                        <ListItem key={task.id}>
+                          <Flex
+                            justifyContent="space-between"
+                            alignItems="center"
+                          >
+                            <Text>{task.task}</Text>
+                            <Text
+                              color={task.done ? "black" : "blue.500"}
+                              onClick={() => {
+                                setCurrentTaskId(task.id);
+                                onHardTaskCodeOpen();
+                              }}
+                              whiteSpace="nowrap"
+                              pl={1}
                             >
-                              Patvirtinti
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              onClick={onHardTaskCodeClose}
+                              {task.done ? "Užduotis atlikta" : "Įvesti kodą"}
+                            </Text>
+                            <Modal
+                              isOpen={isHardTaskCodeOpen}
+                              onClose={onHardTaskCodeClose}
                             >
-                              Atšaukti
-                            </Button>
-                          </ModalFooter>
-                        </ModalContent>
-                      </Modal>
-                    </Flex>
-                  </ListItem>
-                ))}
-              </OrderedList>
+                              <ModalOverlay />
+                              <ModalContent>
+                                <ModalHeader>Užduoties užbaigimas</ModalHeader>
+                                <ModalCloseButton />
+                                <ModalBody>
+                                  Įveskite užduoties kodą:
+                                  <Input
+                                    type="number"
+                                    value={hardTaskCode}
+                                    onChange={handleHardTaskCodeChange}
+                                    placeholder="Užduoties kodas"
+                                  />
+                                </ModalBody>
+                                <ModalFooter>
+                                  <Button
+                                    colorScheme="blue"
+                                    mr={3}
+                                    onClick={() =>
+                                      checkHardTaskCode(currentTaskId)
+                                    }
+                                  >
+                                    Patvirtinti
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    onClick={onHardTaskCodeClose}
+                                  >
+                                    Atšaukti
+                                  </Button>
+                                </ModalFooter>
+                              </ModalContent>
+                            </Modal>
+                          </Flex>
+                        </ListItem>
+                      ))}
+                    </OrderedList>
+                  </>
+                ) : (
+                  <></>
+                )
+              ) : (
+                <>
+                  <Text fontWeight="500" fontSize="16px">
+                    Lengvos užduotys:
+                  </Text>
+                  <OrderedList fontSize="14px">
+                    {currentPlayer.easyTasks.map((task: any) => (
+                      <ListItem key={task.id}>
+                        <Flex
+                          justifyContent="space-between"
+                          alignItems="center"
+                        >
+                          <Text>{task.task}</Text>
+                          <Text
+                            color={task.done ? "black" : "blue.500"}
+                            onClick={() => {
+                              setCurrentTaskId(task.id);
+                              onEasyTaskCodeOpen();
+                            }}
+                            whiteSpace="nowrap"
+                            pl={1}
+                          >
+                            {task.done ? "Užduotis atlikta" : "Įvesti kodą"}
+                          </Text>
+                          <Modal
+                            isOpen={isEasyTaskCodeOpen}
+                            onClose={onEasyTaskCodeClose}
+                          >
+                            <ModalOverlay />
+                            <ModalContent>
+                              <ModalHeader>Užduoties užbaigimas</ModalHeader>
+                              <ModalCloseButton />
+                              <ModalBody>
+                                Įveskite užduoties kodą:
+                                <Input
+                                  type="number"
+                                  value={easyTaskCode}
+                                  onChange={handleEasyTaskCodeChange}
+                                  placeholder="Užduoties kodas"
+                                />
+                              </ModalBody>
+                              <ModalFooter>
+                                <Button
+                                  colorScheme="blue"
+                                  mr={3}
+                                  onClick={() =>
+                                    checkEasyTaskCode(currentTaskId)
+                                  }
+                                >
+                                  Patvirtinti
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  onClick={onEasyTaskCodeClose}
+                                >
+                                  Atšaukti
+                                </Button>
+                              </ModalFooter>
+                            </ModalContent>
+                          </Modal>
+                        </Flex>
+                      </ListItem>
+                    ))}
+                  </OrderedList>
+                  <Text fontWeight="500" fontSize="16px" mt={2}>
+                    Vidutinio sunkumo užduotys:
+                  </Text>
+                  <OrderedList fontSize="14px">
+                    {currentPlayer.mediumTasks.map((task: any) => (
+                      <ListItem key={task.id}>
+                        <Flex
+                          justifyContent="space-between"
+                          alignItems="center"
+                        >
+                          <Text>{task.task}</Text>
+                          <Text
+                            color={task.done ? "black" : "blue.500"}
+                            onClick={() => {
+                              setCurrentTaskId(task.id);
+                              onMediumTaskCodeOpen();
+                            }}
+                            whiteSpace="nowrap"
+                            pl={1}
+                          >
+                            {task.done ? "Užduotis atlikta" : "Įvesti kodą"}
+                          </Text>
+                          <Modal
+                            isOpen={isMediumTaskCodeOpen}
+                            onClose={onMediumTaskCodeClose}
+                          >
+                            <ModalOverlay />
+                            <ModalContent>
+                              <ModalHeader>Užduoties užbaigimas</ModalHeader>
+                              <ModalCloseButton />
+                              <ModalBody>
+                                Įveskite užduoties kodą:
+                                <Input
+                                  type="number"
+                                  value={mediumTaskCode}
+                                  onChange={handleMediumTaskCodeChange}
+                                  placeholder="Užduoties kodas"
+                                />
+                              </ModalBody>
+                              <ModalFooter>
+                                <Button
+                                  colorScheme="blue"
+                                  mr={3}
+                                  onClick={() =>
+                                    checkMediumTaskCode(currentTaskId)
+                                  }
+                                >
+                                  Patvirtinti
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  onClick={onMediumTaskCodeClose}
+                                >
+                                  Atšaukti
+                                </Button>
+                              </ModalFooter>
+                            </ModalContent>
+                          </Modal>
+                        </Flex>
+                      </ListItem>
+                    ))}
+                  </OrderedList>
+                  <Text fontWeight="500" fontSize="16px" mt={2}>
+                    Sunkios užduotys:
+                  </Text>
+                  <OrderedList fontSize="14px">
+                    {currentPlayer.hardTasks.map((task: any) => (
+                      <ListItem key={task.id}>
+                        <Flex
+                          justifyContent="space-between"
+                          alignItems="center"
+                        >
+                          <Text>{task.task}</Text>
+                          <Text
+                            color={task.done ? "black" : "blue.500"}
+                            onClick={() => {
+                              setCurrentTaskId(task.id);
+                              onHardTaskCodeOpen();
+                            }}
+                            whiteSpace="nowrap"
+                            pl={1}
+                          >
+                            {task.done ? "Užduotis atlikta" : "Įvesti kodą"}
+                          </Text>
+                          <Modal
+                            isOpen={isHardTaskCodeOpen}
+                            onClose={onHardTaskCodeClose}
+                          >
+                            <ModalOverlay />
+                            <ModalContent>
+                              <ModalHeader>Užduoties užbaigimas</ModalHeader>
+                              <ModalCloseButton />
+                              <ModalBody>
+                                Įveskite užduoties kodą:
+                                <Input
+                                  type="number"
+                                  value={hardTaskCode}
+                                  onChange={handleHardTaskCodeChange}
+                                  placeholder="Užduoties kodas"
+                                />
+                              </ModalBody>
+                              <ModalFooter>
+                                <Button
+                                  colorScheme="blue"
+                                  mr={3}
+                                  onClick={() =>
+                                    checkHardTaskCode(currentTaskId)
+                                  }
+                                >
+                                  Patvirtinti
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  onClick={onHardTaskCodeClose}
+                                >
+                                  Atšaukti
+                                </Button>
+                              </ModalFooter>
+                            </ModalContent>
+                          </Modal>
+                        </Flex>
+                      </ListItem>
+                    ))}
+                  </OrderedList>
+                </>
+              )}
             </>
           ) : currentPlayer.role === "imposter" ? (
             currentPlayer.isDead ? (
@@ -3229,7 +3478,160 @@ function GameWaitingRoom() {
               </>
             )
           ) : (
-            ""
+            <>
+              {gameSabotaged && !currentPlayer.isDead && (
+                <Text fontWeight="600" fontSize="20px" color="red.600">
+                  Skubios užduotys:
+                </Text>
+              )}
+              {gameSabotageType === "oxygen" && !currentPlayer.isDead ? (
+                <>
+                  <Text color="red.600" fontWeight="600" mb={1}>
+                    Liko laiko:{" "}
+                    {moment(gameSabotageEndsAt - 3 * 60 * 60 * 1000).format(
+                      "mm:ss"
+                    )}
+                  </Text>
+                  <Flex justifyContent="space-between" alignItems="center">
+                    <Text>
+                      1. Įveskite virtuvėje ant spintelės esančiame lapelyje
+                      nurodytą kodą
+                    </Text>
+                    <Text
+                      color={oxygenFirstDone ? "black" : "blue.600"}
+                      onClick={() => {
+                        onOxygenFirstOpen();
+                      }}
+                      whiteSpace="nowrap"
+                      pl={1}
+                    >
+                      {oxygenFirstDone ? "Kodas įvestas" : "Įvesti kodą"}
+                    </Text>
+                    <Modal
+                      isOpen={isOxygenFirstOpen}
+                      onClose={onOxygenFirstClose}
+                    >
+                      <ModalOverlay />
+                      <ModalContent>
+                        <ModalHeader>Užduoties užbaigimas</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                          Įveskite užduoties kodą:
+                          <Input
+                            type="number"
+                            value={oxygenFirst}
+                            onChange={handleOxygenFirstChange}
+                            placeholder="Užduoties kodas"
+                          />
+                        </ModalBody>
+                        <ModalFooter>
+                          <Button
+                            colorScheme="blue"
+                            mr={3}
+                            onClick={checkOxygenFirst}
+                          >
+                            Patvirtinti
+                          </Button>
+                          <Button variant="ghost" onClick={onOxygenFirstClose}>
+                            Atšaukti
+                          </Button>
+                        </ModalFooter>
+                      </ModalContent>
+                    </Modal>
+                  </Flex>
+                  <Flex justifyContent="space-between" alignItems="center">
+                    <Text>
+                      2. Įveskite 3 kambaryje ant sienos esančiame lapelyje
+                      nurodytą kodą
+                    </Text>
+                    <Text
+                      color={oxygenSecondDone ? "black" : "blue.600"}
+                      onClick={() => {
+                        onOxygenSecondOpen();
+                      }}
+                      whiteSpace="nowrap"
+                      pl={1}
+                    >
+                      {oxygenSecondDone ? "Kodas įvestas" : "Įvesti kodą"}
+                    </Text>
+                    <Modal
+                      isOpen={isOxygenSecondOpen}
+                      onClose={onOxygenSecondClose}
+                    >
+                      <ModalOverlay />
+                      <ModalContent>
+                        <ModalHeader>Užduoties užbaigimas</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                          Įveskite užduoties kodą:
+                          <Input
+                            type="number"
+                            value={oxygenSecond}
+                            onChange={handleOxygenSecondChange}
+                            placeholder="Užduoties kodas"
+                          />
+                        </ModalBody>
+                        <ModalFooter>
+                          <Button
+                            colorScheme="blue"
+                            mr={3}
+                            onClick={checkOxygenSecond}
+                          >
+                            Patvirtinti
+                          </Button>
+                          <Button variant="ghost" onClick={onOxygenSecondClose}>
+                            Atšaukti
+                          </Button>
+                        </ModalFooter>
+                      </ModalContent>
+                    </Modal>
+                  </Flex>
+                </>
+              ) : gameSabotageType === "comms" && !currentPlayer.isDead ? (
+                <Flex justifyContent="space-between" alignItems="center">
+                  <Text>
+                    1. Įveskite pagrindinėje salėje ant sienos esančiame
+                    lapelyje nurodytą kodą, kad vėl matytumėte savo užduotis
+                  </Text>
+                  <Text
+                    color={commsDone ? "black" : "blue.600"}
+                    onClick={() => {
+                      onCommsOpen();
+                    }}
+                    whiteSpace="nowrap"
+                    pl={1}
+                  >
+                    {commsDone ? "Kodas įvestas" : "Įvesti kodą"}
+                  </Text>
+                  <Modal isOpen={isCommsOpen} onClose={onCommsClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>Užduoties užbaigimas</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        Įveskite užduoties kodą:
+                        <Input
+                          type="number"
+                          value={comms}
+                          onChange={handleCommsChange}
+                          placeholder="Užduoties kodas"
+                        />
+                      </ModalBody>
+                      <ModalFooter>
+                        <Button colorScheme="blue" mr={3} onClick={checkComms}>
+                          Patvirtinti
+                        </Button>
+                        <Button variant="ghost" onClick={onCommsClose}>
+                          Atšaukti
+                        </Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </Flex>
+              ) : (
+                ""
+              )}
+            </>
           )}
           <Text fontWeight="600" fontSize="30px" mt={6} mb={2}>
             Žaidėjai:
@@ -3421,16 +3823,6 @@ function PlayerInGame(props: any) {
     onOpen: onVotePlayerOpen,
     onClose: onVotePlayerClose,
   } = useDisclosure();
-  const kickPlayer = async (userid: string) => {
-    const playerRef = firestore.collection("players").doc(userid);
-    await playerRef.update({
-      inGame: false,
-      ready: false,
-      role: "dq",
-      screenHidden: false,
-    });
-    onKickPlayerClose();
-  };
   const toast = useToast();
   const [countdown, setCountdown] = useState(
     currentPlayer?.data().cooldownEndsAt
@@ -3470,6 +3862,37 @@ function PlayerInGame(props: any) {
         <br />
       </>
     );
+  const kickPlayer = async (userid: string) => {
+    const playerRef = firestore.collection("players").doc(userid);
+    await playerRef.update({
+      inGame: false,
+      ready: false,
+      role: "dq",
+      screenHidden: false,
+    });
+    onKickPlayerClose();
+    if (aliveImposters?.length >= aliveCrewmates?.length - 1) {
+      const batch = firestore.batch();
+      const allPlayers = await playersRef.get();
+      allPlayers.forEach((doc) => {
+        batch.update(playersRef.doc(doc.id), {
+          win: "imposters",
+        });
+      });
+      await batch.commit();
+      setImpostersWin(true);
+    } else if (aliveImposters?.length === 0) {
+      const batch = firestore.batch();
+      const allPlayers = await playersRef.get();
+      allPlayers.forEach((doc) => {
+        batch.update(playersRef.doc(doc.id), {
+          win: "crewmates",
+        });
+      });
+      await batch.commit();
+      setCrewmatesWin(true);
+    }
+  };
   const killPlayer = async (userid: string) => {
     if (currentPlayer?.data().cooldownEndsAt >= Date.now()) {
       toast({
@@ -3511,7 +3934,17 @@ function PlayerInGame(props: any) {
       killedBy: "voted",
     });
     onVotePlayerClose();
-    if (aliveImposters?.length === 0) {
+    if (aliveImposters?.length >= aliveCrewmates?.length - 1) {
+      const batch = firestore.batch();
+      const allPlayers = await playersRef.get();
+      allPlayers.forEach((doc) => {
+        batch.update(playersRef.doc(doc.id), {
+          win: "imposters",
+        });
+      });
+      await batch.commit();
+      setImpostersWin(true);
+    } else if (aliveImposters?.length === 0) {
       const batch = firestore.batch();
       const allPlayers = await playersRef.get();
       allPlayers.forEach((doc) => {
@@ -3744,6 +4177,154 @@ function PlayerInGame(props: any) {
             ) : (
               ""
             )
+          ) : (
+            <Text color="red.600" fontWeight="600">
+              Apsimetėlis
+            </Text>
+          ))}
+      </Flex>
+    </>
+  );
+}
+
+function PlayerInGameInMeeting(props: any) {
+  const { name, uid, isDead, role, doneTasks, isReported } = props.info;
+  const playersRef = firestore.collection("players");
+  const aliveCrewmatesRef = firestore
+    .collection("players")
+    .where("role", "==", "crewmate")
+    .where("isDead", "==", false);
+  const aliveImpostersRef = firestore
+    .collection("players")
+    .where("role", "==", "imposter")
+    .where("isDead", "==", false);
+  const [aliveCrewmates] = useCollectionData(aliveCrewmatesRef, {
+    idField: "id",
+  });
+  const [aliveImposters] = useCollectionData(aliveImpostersRef, {
+    idField: "id",
+  });
+  const currentPlayerRef = playersRef.doc(auth.currentUser?.uid);
+  const [currentPlayer]: any = useDocument(currentPlayerRef);
+  const {
+    isOpen: isVotePlayerOpen,
+    onOpen: onVotePlayerOpen,
+    onClose: onVotePlayerClose,
+  } = useDisclosure();
+  const [impostersWin, setImpostersWin] = useState(false);
+  const [crewmatesWin, setCrewmatesWin] = useState(false);
+  useEffect(() => {
+    props.setWinImposters(impostersWin);
+  }, [props.setWinImposters, impostersWin]);
+  useEffect(() => {
+    props.setWinCrewmates(crewmatesWin);
+  }, [props.setWinCrewmates, crewmatesWin]);
+  if (!currentPlayer?.data() || !aliveCrewmates || !aliveImposters)
+    return (
+      <>
+        Kraunama...
+        <br />
+      </>
+    );
+  const votePlayer = async (userid: string) => {
+    const playerRef = firestore.collection("players").doc(userid);
+    await playerRef.update({
+      isDead: true,
+      killedBy: "voted",
+    });
+    onVotePlayerClose();
+    if (aliveImposters?.length === 0) {
+      const batch = firestore.batch();
+      const allPlayers = await playersRef.get();
+      allPlayers.forEach((doc) => {
+        batch.update(playersRef.doc(doc.id), {
+          win: "crewmates",
+        });
+      });
+      await batch.commit();
+      setCrewmatesWin(true);
+    }
+  };
+  return (
+    <>
+      <Flex alignItems="center" justifyContent="space-between" mb={2}>
+        <Flex alignItems="center">
+          <Text
+            fontWeight={
+              auth.currentUser?.uid === uid
+                ? "600"
+                : currentPlayer?.data().role === "admin" && role === "imposter"
+                ? "600"
+                : currentPlayer?.data().role === "admin" && role === "crewmate"
+                ? "600"
+                : "400"
+            }
+            color={
+              currentPlayer?.data().role === "admin" && role === "imposter"
+                ? "red.600"
+                : currentPlayer?.data().role === "admin" && role === "crewmate"
+                ? "blue.600"
+                : "black"
+            }
+          >
+            {name}
+          </Text>
+          {currentPlayer?.data().role === "admin" && role === "crewmate" && (
+            <Text ml={1}>({doneTasks}/6)</Text>
+          )}
+          {currentPlayer?.data().role === "admin" && isDead && (
+            <WarningTwoIcon color="red.600" ml={1} />
+          )}
+        </Flex>
+        {auth.currentUser?.uid !== uid &&
+          (currentPlayer?.data().role === "crewmate" ? (
+            !currentPlayer?.data().isDead ? (
+              <>
+                {isReported ? (
+                  <Text color="red.600">Žaidėjas miręs</Text>
+                ) : (
+                  <Text color="blue.600">Žaidėjas gyvas</Text>
+                )}
+              </>
+            ) : (
+              ""
+            )
+          ) : currentPlayer?.data().role === "admin" ? (
+            currentPlayer?.data().isMeetingStarted && (
+              <>
+                <Text color="green.600" onClick={onVotePlayerOpen}>
+                  Išbalsuoti žaidėją
+                </Text>
+                <Modal onClose={onVotePlayerClose} isOpen={isVotePlayerOpen}>
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>Išbalsuoti žaidėją</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                      <Text display="inline">Ar tikrai norite išbalsuoti </Text>
+                      <Text display="inline" fontWeight="600">
+                        {name}
+                      </Text>
+                      <Text display="inline"> iš žaidimo?</Text>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button
+                        colorScheme="green"
+                        mr={3}
+                        onClick={() => votePlayer(uid)}
+                      >
+                        Patvirtinti
+                      </Button>
+                      <Button variant="ghost" onClick={onVotePlayerClose}>
+                        Atšaukti
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
+              </>
+            )
+          ) : isDead ? (
+            <Text color="red.600">Žaidėjas miręs</Text>
           ) : (
             <Text color="red.600" fontWeight="600">
               Apsimetėlis
