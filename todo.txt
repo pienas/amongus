@@ -1,0 +1,21 @@
+sabotages:
+comms (neberodo task, nebent mires)
+oxygen (per laika suvest kodus dviejose vietose)
+
+taisykles:
+Negalima atskleisti kas yra apsimeteliai
+Negalima atskleisti kad esi mires
+Negalima atskleisti kas tave nuzude
+Privaloma daryti uzduotis net ir mirus
+Jei ieini i patalpa su durim, turi jas uzdaryt
+Grazinti daiktus kuriuos paimi is moderatoriu
+Negalima prasyti irodyti savo roles
+Nesidalinti kodais ir juos issaugoti
+Privaloma padarius uzduoti grazinti viska i taip kaip buvo
+Negalima begioti
+Mire nesneka per emergency meeting
+Nuzudyti zaideja galima numusus kepure
+Numusta kepure turi likti toje vietoje kur igulos narys buvo nuzudytas
+
+todo:
+resetgame - nuimti komentara nuo ready
