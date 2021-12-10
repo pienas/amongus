@@ -22,7 +22,17 @@ netikrint asmeniniu daiktu
 todo:
 resetgame - nuimti komentara nuo ready
 random number kad isrinkt imposterius
+veiskmu sarasas adminams
+paziuret requestus kai ivyksta win
+
+661084
+604902
+
+
+done:
 adminam rodyt emergency tasks
 meetinge rodyt zaideju sarasa su naujais mirusiais
-
+isjungt sabotage kai jau pradetas
+isjungt susirinkima kai sabotage
 diskvalifikavus tikrint laimejima
+check if imposters win after voting in meeting
