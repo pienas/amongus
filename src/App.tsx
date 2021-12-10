@@ -557,13 +557,15 @@ function GameWaitingRoom() {
         batch.update(allPlayersRef.doc(doc.id), {
           isSabotaged: false,
           sabotageType: "",
-          sabotageEndsAt: Date.now(),
+          sabotageEndsAt: Date.now() + 2592000000,
+          sabotageCooldownEndsAt: Date.now() + 180000,
         });
       });
       await secondBatch.commit();
       setGameSabotaged(false);
       setGameSabotageType("");
-      setGameSabotageEndsAt(Date.now());
+      setGameSabotageEndsAt(Date.now() + 2592000000);
+      setSabotageCooldownEndsAt(Date.now() + 180000);
     }
   };
   const completeOxygenSecond = async () => {
@@ -584,13 +586,15 @@ function GameWaitingRoom() {
         batch.update(allPlayersRef.doc(doc.id), {
           isSabotaged: false,
           sabotageType: "",
-          sabotageEndsAt: Date.now(),
+          sabotageEndsAt: Date.now() + 2592000000,
+          sabotageCooldownEndsAt: Date.now() + 180000,
         });
       });
       await secondBatch.commit();
       setGameSabotaged(false);
       setGameSabotageType("");
-      setGameSabotageEndsAt(Date.now());
+      setGameSabotageEndsAt(Date.now() + 2592000000);
+      setSabotageCooldownEndsAt(Date.now() + 180000);
     }
   };
   const completeComms = async () => {
@@ -599,26 +603,20 @@ function GameWaitingRoom() {
     allPlayers.forEach((doc) => {
       batch.update(allPlayersRef.doc(doc.id), {
         isCommsDone: true,
+        isSabotaged: false,
+        sabotageType: "",
+        sabotageEndsAt: Date.now() + 2592000000,
+        sabotageCooldownEndsAt: Date.now() + 180000,
       });
     });
     await batch.commit();
     setCommsDone(true);
     onCommsClose();
     setComms("");
-    if (currentPlayer.isCommsDone) {
-      const secondBatch = firestore.batch();
-      allPlayers.forEach((doc) => {
-        batch.update(allPlayersRef.doc(doc.id), {
-          isSabotaged: false,
-          sabotageType: "",
-          sabotageEndsAt: Date.now(),
-        });
-      });
-      await secondBatch.commit();
-      setGameSabotaged(false);
-      setGameSabotageType("");
-      setGameSabotageEndsAt(Date.now());
-    }
+    setGameSabotaged(false);
+    setGameSabotageType("");
+    setGameSabotageEndsAt(Date.now() + 2592000000);
+    setSabotageCooldownEndsAt(Date.now() + 180000);
   };
   const doneTasks = () => {
     var done = 0;
@@ -951,89 +949,1051 @@ function GameWaitingRoom() {
           code: 285597,
         },
       ];
+      const easyTasks2 = [
+        {
+          task: "Pasiimkite popieriaus lapą su siluetu iš 1 kambario ir su šalia esančiais pieštukais užspalvinkite siluetą, panaudodami bent 2 skirtingų spalvų pieštukus. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite užspalvintą siluetą moderatoriui esančiam pagrindinėje salėje prie stalo.",
+          done: false,
+          id: 1,
+          code: 937722,
+        },
+        {
+          task: "Pasiimkite popieriaus lapą su siluetu iš 4 kambario ir su šalia esančiomis žirklėmis iškirpkite popieriuje esantį siluetą. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite iškirptą siluetą moderatoriui esančiam virtuvėje.",
+          done: false,
+          id: 2,
+          code: 497152,
+        },
+        {
+          task: "Pasiimkite tuščią popieriaus lapą iš 2 kambario ir su šalia esančiu tušinuku užrašykite visą lietuvišką abėcelę. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite lapą su jame užrašyta abėcele moderatoriui esančiam 3 kambaryje.",
+          done: false,
+          id: 3,
+          code: 648438,
+        },
+        {
+          task: "Pasiimkite tuščią popieriaus lapą iš 2 kambario ir su šalia esančiu tušinuku apipieškite savo kairę ranką. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite lapą su jame apibrėžta jūsų kaire ranka moderatoriui esančiam virtuvėje.",
+          done: false,
+          id: 4,
+          code: 409546,
+        },
+        {
+          task: "Pasiimkite tuščią popieriaus lapą iš 2 kambario ir išlankstykite iš jo lėktuvėlį. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite išlankstytą lėktuvėlį moderatoriui esančiam pagrindinėje salėje prie stalo.",
+          done: false,
+          id: 5,
+          code: 897065,
+        },
+        {
+          task: "Įmeskite kauliuką į puodelį virtuvėje iš 2 metrų atstumo. Įvykdžius užduotį kodą reikalingą užduočiai užbaigti jums duos moderatorius.",
+          done: false,
+          id: 6,
+          code: 935744,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant įėjimo durų kabo lapas su QR kodu. Nuskaitykite QR kodą, kad gautumėte užduočiai užbaigti reikalingą kodą.",
+          done: false,
+          id: 7,
+          code: 996364,
+        },
+        {
+          task: "Viduje prie išėjimo kabo lapas su QR kodu. Nuskaitykite QR kodą, kad gautumėte užduočiai užbaigti reikalingą kodą.",
+          done: false,
+          id: 8,
+          code: 226305,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant suoliuko prie šašlykinės guli lapas su QR kodu. Nuskaitykite QR kodą, kad gautumėte užduočiai užbaigti reikalingą kodą.",
+          done: false,
+          id: 9,
+          code: 843459,
+        },
+        {
+          task: "Raskite lapą 7 kambaryje su nuoroda failo atsisiuntimui. Užduoties kodą rasite atsisiuntę ir atidarę failą.",
+          done: false,
+          id: 10,
+          code: 942599,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke prie kairiojo įvažiavimo ant medžio su nuoroda failo atsisiuntimui. Užduoties kodą rasite atsisiuntę ir atidarę failą.",
+          done: false,
+          id: 11,
+          code: 818088,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke ant medžio, esančio prie pastato, su nuoroda failo atsisiuntimui. Užduoties kodą rasite atsisiuntę ir atidarę failą.",
+          done: false,
+          id: 12,
+          code: 961767,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite paslėptą puodelį pavėsinėje, ant kurio yra užklijuotas užduoties kodas.",
+          done: false,
+          id: 13,
+          code: 918217,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite paslėptą puodelį lauke prie pastato, ant kurio yra užklijuotas užduoties kodas.",
+          done: false,
+          id: 14,
+          code: 895446,
+        },
+        {
+          task: "Raskite paslėptą puodelį 9 kambaryje, ant kurio yra užklijuotas užduoties kodas.",
+          done: false,
+          id: 15,
+          code: 774747,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke ant pastato, ant kurio yra nuoroda. Nuorodoje rasite užduoties kodą.",
+          done: false,
+          id: 16,
+          code: 304306,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke ant vienos iš mašinų, ant kurio yra nuoroda. Nuorodoje rasite užduoties kodą.",
+          done: false,
+          id: 17,
+          code: 990507,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke ant vieno iš medžių kairiame įvažiavime, ant kurio yra nuoroda. Nuorodoje rasite užduoties kodą.",
+          done: false,
+          id: 18,
+          code: 375619,
+        },
+        {
+          task: "Paimkite lapą iš virtuvės, ant kurio yra matematinė užduotis. Užduoties kodą gausite išsprendę užduotį.",
+          done: false,
+          id: 19,
+          code: 526140,
+        },
+        {
+          task: "Paimkite lapą iš 8 kambario, ant kurio yra matematinė užduotis. Užduoties kodą gausite išsprendę užduotį.",
+          done: false,
+          id: 20,
+          code: 515255,
+        },
+        {
+          task: "Paimkite lapą iš 6 kambario, ant kurio yra matematinė užduotis. Užduoties kodą gausite išsprendę užduotį.",
+          done: false,
+          id: 21,
+          code: 171023,
+        },
+        {
+          task: "7 kambaryje rasite daug užverstų lapų. Atvertinėkite lapus, tol kol rasite ant vieno iš jų parašytą užduoties kodą. Nepamirškite įvykdę užduotį užversti lapų atgal.",
+          done: false,
+          id: 22,
+          code: 791335,
+        },
+        {
+          task: "5 kambaryje kabo lapas su QR kodu. Nuskaitykite QR kodą, kad gautumėte užduočiai užbaigti reikalingą kodą.",
+          done: false,
+          id: 23,
+          code: 841671,
+        },
+        {
+          task: "Raskite lapą 5 kambaryje, ant kurio yra nuoroda. Nuorodoje rasite užduoties kodą.",
+          done: false,
+          id: 24,
+          code: 746019,
+        },
+      ];
+      const mediumTasks2 = [
+        {
+          task: "Pasiimkite popieriaus lapą su jame esančiu testu iš 3 kambario ir su šalia esančiu tušinuku pažymėkite teisingus atsakymus teste. Kodas reikalingas išspręsti užduočiai - šalia teisingų variantų esantys skaičiai iš eilės. Išspręsta testą atiduokite kambaryje esančiam moderatoriui.",
+          done: false,
+          id: 25,
+          code: 655039,
+        },
+        {
+          task: "Apsirenkite šiltai. Pripūskite ir susprogdinkite balioną, kuris yra pririštas prie pavėsinės. Užduoties kodas - baliono viduje.",
+          done: false,
+          id: 26,
+          code: 899421,
+        },
+        {
+          task: "Sujunkite laidus pagal spalvas 2 kambaryje. Užduoties kodas - sudėkite mėlyno laido pradžios poziciją ir raudono laido pabaigos poziciją ir gautą skaičių pakelkite 9 laipsniu. Įvykdžius užduotį laidus atjunkite.",
+          done: false,
+          id: 27,
+          code: 262144,
+        },
+        {
+          task: "Sujunkite laidus pagal spalvas 4 kambaryje. Užduoties kodas - sudėkite geltono laido pradžios poziciją ir geltono laido pabaigos poziciją ir gautą skaičių pakelkite 7 laipsniu. Įvykdžius užduotį laidus atjunkite.",
+          done: false,
+          id: 28,
+          code: 279936,
+        },
+        {
+          task: "Sujunkite laidus pagal spalvas 5 kambaryje. Užduoties kodas - sudėkite rožinio laido pradžios poziciją ir mėlyno laido pabaigos poziciją ir gautą skaičių pakelkite 12 laipsniu. Įvykdžius užduotį laidus atjunkite.",
+          done: false,
+          id: 29,
+          code: 531441,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke prie dešiniojo įvažiavimo į sodybą ant vieno iš medžių kabo lapas su brailio raštu. Iššifruokite brailio raštu parašytus skaičius ir įveskite juos, kad užbaigtumėte užduotį.",
+          done: false,
+          id: 30,
+          code: 485736,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke prie pavesinės ant medžio kabo lapas su brailio raštu. Iššifruokite brailio raštu parašytus skaičius ir įveskite juos, kad užbaigtumėte užduotį.",
+          done: false,
+          id: 31,
+          code: 350737,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant vienos iš mašinų kabo lapas su brailio raštu. Iššifruokite brailio raštu parašytus skaičius ir įveskite juos, kad užbaigtumėte užduotį.",
+          done: false,
+          id: 32,
+          code: 606584,
+        },
+        {
+          task: "Raskite lapą su koordinatėmis pagrindinėje salėje ant sienos. Užduoties kodas - miestelio tose koordinatėse gyventojų skaičius (pagal Vikipediją) padauginta iš 188.",
+          done: false,
+          id: 33,
+          code: 394424,
+        },
+        {
+          task: "Raskite lapą su koordinatėmis antrame aukšte prie laiptų. Užduoties kodas - miestelio tose koordinatėse gyventojų skaičius (pagal Vikipediją) padauginta iš 1094.",
+          done: false,
+          id: 34,
+          code: 476984,
+        },
+        {
+          task: "Raskite lapą su koordinatėmis 5 kambario balkone. Užduoties kodas - miestelio tose koordinatėse gyventojų skaičius (pagal Vikipediją) padauginta iš 987.",
+          done: false,
+          id: 35,
+          code: 733341,
+        },
+        {
+          task: "Pasisverkite ant svarstyklių esančių 3 kambaryje ir užrasykite savo vardą bei svorį, kurį parodė svarstyklės lape esančiame prie svarstyklių. Atlikus užduotį, kodą gausite iš moderatoriaus.",
+          done: false,
+          id: 36,
+          code: 849024,
+        },
+        {
+          task: "Raskite paslėptą daiktą 2 kambaryje. Daiktas raudonos spalvos, labai lengvas ir iš plastiko. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 96489.",
+          done: false,
+          id: 37,
+          code: 578934,
+        },
+        {
+          task: "Raskite paslėptą daiktą virtuvėje. Daiktas žalios spalvos, šiltas ir minkštas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 54698.",
+          done: false,
+          id: 38,
+          code: 492282,
+        },
+        {
+          task: "Raskite paslėptą daiktą 8 kambaryje. Daiktas mėlynos spalvos, popierinis. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 87456.",
+          done: false,
+          id: 39,
+          code: 87456,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite paslėptą daiktą prie vienos iš mašinų. Daiktas raudonos spalvos, pailgas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 42013.",
+          done: false,
+          id: 40,
+          code: 252078,
+        },
+      ];
+      const hardTasks2 = [
+        {
+          task: "5 kambaryje ant sienos popieriaus lape rasite QR kodą, kuris jus nuves į vaizdo įrašą. Peržiūrėkite vaizdo įrašą ir raskite jame 6 skaičius, kurie ir bus užduoties kodas.",
+          done: false,
+          id: 41,
+          code: 790363,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant vienos iš mašinų kabo lapas su užkoduotu žodžiu. Šifras, kuriuo užkoduotas žodis, nurodytas lape. Iššifruokite žodį. Užduoties kodas - žodžio ilgis pakeltas 8 laipsniu.",
+          done: false,
+          id: 42,
+          code: 390625,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant namo sienos kabo lapas su užkoduotu žodžiu. Šifras, kuriuo užkoduotas žodis, nurodytas lape. Iššifruokite žodį. Užduoties kodas - žodžio ilgis pakeltas 5 laipsniu.",
+          done: false,
+          id: 43,
+          code: 161051,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant akmeninės šašlykinės kabo lapas su užkoduotu žodžiu. Šifras, kuriuo užkoduotas žodis, nurodytas lape. Iššifruokite žodį. Užduoties kodas - žodžio ilgis pakeltas 11 laipsniu.",
+          done: false,
+          id: 44,
+          code: 177147,
+        },
+        {
+          task: "Paimkite plastmasinį bliudelį iš 7 kambario ir nuneškite jį moderatoriui į virtuvę. Moderatorius jums į bliudelį įdės lapelį. Tuomet nuneškite bliudelį su lapeliu viduje moderatoriui į 3 kambarį. Kai moderatorius 3 kambaryje įdės jums dar vieną lapelį, nuneškite bliudelį su abiem lapeliais viduje moderatoriui į pagrindinę salę prie stalo, kur gausite užduoties kodą.",
+          done: false,
+          id: 45,
+          code: 719956,
+        },
+        {
+          task: "Atspėkite dainą grojančią 9 kambaryje. Užduoties kodas - dainos atlikėjo ilgis pakeltas 5 laipsniu.",
+          done: false,
+          id: 46,
+          code: 100000,
+        },
+        {
+          task: "Paimkite popieriaus lapą 6 kambaryje su jame esančiu labirintu ir jį išsprendę pristatykite moderatoriui pagrindinėje salėje prie stalo, kad gautumėte užduoties kodą.",
+          done: false,
+          id: 47,
+          code: 659504,
+        },
+        {
+          task: "Pasiimkite popieriaus lapą su jame esančiu testu iš virtuvės ir su šalia esančiu tušinuku pažymėkite teisingus atsakymus teste. Kodas reikalingas išspręsti užduočiai - šalia teisingų variantų esantys skaičiai iš eilės. Išspręsta testą atiduokite kambaryje esančiam moderatoriui.",
+          done: false,
+          id: 48,
+          code: 285597,
+        },
+      ];
+      const easyTasks3 = [
+        {
+          task: "Pasiimkite popieriaus lapą su siluetu iš 1 kambario ir su šalia esančiais pieštukais užspalvinkite siluetą, panaudodami bent 2 skirtingų spalvų pieštukus. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite užspalvintą siluetą moderatoriui esančiam pagrindinėje salėje prie stalo.",
+          done: false,
+          id: 1,
+          code: 937722,
+        },
+        {
+          task: "Pasiimkite popieriaus lapą su siluetu iš 4 kambario ir su šalia esančiomis žirklėmis iškirpkite popieriuje esantį siluetą. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite iškirptą siluetą moderatoriui esančiam virtuvėje.",
+          done: false,
+          id: 2,
+          code: 497152,
+        },
+        {
+          task: "Pasiimkite tuščią popieriaus lapą iš 2 kambario ir su šalia esančiu tušinuku užrašykite visą lietuvišką abėcelę. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite lapą su jame užrašyta abėcele moderatoriui esančiam 3 kambaryje.",
+          done: false,
+          id: 3,
+          code: 648438,
+        },
+        {
+          task: "Pasiimkite tuščią popieriaus lapą iš 2 kambario ir su šalia esančiu tušinuku apipieškite savo kairę ranką. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite lapą su jame apibrėžta jūsų kaire ranka moderatoriui esančiam virtuvėje.",
+          done: false,
+          id: 4,
+          code: 409546,
+        },
+        {
+          task: "Pasiimkite tuščią popieriaus lapą iš 2 kambario ir išlankstykite iš jo lėktuvėlį. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite išlankstytą lėktuvėlį moderatoriui esančiam pagrindinėje salėje prie stalo.",
+          done: false,
+          id: 5,
+          code: 897065,
+        },
+        {
+          task: "Įmeskite kauliuką į puodelį virtuvėje iš 2 metrų atstumo. Įvykdžius užduotį kodą reikalingą užduočiai užbaigti jums duos moderatorius.",
+          done: false,
+          id: 6,
+          code: 935744,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant įėjimo durų kabo lapas su QR kodu. Nuskaitykite QR kodą, kad gautumėte užduočiai užbaigti reikalingą kodą.",
+          done: false,
+          id: 7,
+          code: 996364,
+        },
+        {
+          task: "Viduje prie išėjimo kabo lapas su QR kodu. Nuskaitykite QR kodą, kad gautumėte užduočiai užbaigti reikalingą kodą.",
+          done: false,
+          id: 8,
+          code: 226305,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant suoliuko prie šašlykinės guli lapas su QR kodu. Nuskaitykite QR kodą, kad gautumėte užduočiai užbaigti reikalingą kodą.",
+          done: false,
+          id: 9,
+          code: 843459,
+        },
+        {
+          task: "Raskite lapą 7 kambaryje su nuoroda failo atsisiuntimui. Užduoties kodą rasite atsisiuntę ir atidarę failą.",
+          done: false,
+          id: 10,
+          code: 942599,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke prie kairiojo įvažiavimo ant medžio su nuoroda failo atsisiuntimui. Užduoties kodą rasite atsisiuntę ir atidarę failą.",
+          done: false,
+          id: 11,
+          code: 818088,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke ant medžio, esančio prie pastato, su nuoroda failo atsisiuntimui. Užduoties kodą rasite atsisiuntę ir atidarę failą.",
+          done: false,
+          id: 12,
+          code: 961767,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite paslėptą puodelį pavėsinėje, ant kurio yra užklijuotas užduoties kodas.",
+          done: false,
+          id: 13,
+          code: 918217,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite paslėptą puodelį lauke prie pastato, ant kurio yra užklijuotas užduoties kodas.",
+          done: false,
+          id: 14,
+          code: 895446,
+        },
+        {
+          task: "Raskite paslėptą puodelį 9 kambaryje, ant kurio yra užklijuotas užduoties kodas.",
+          done: false,
+          id: 15,
+          code: 774747,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke ant pastato, ant kurio yra nuoroda. Nuorodoje rasite užduoties kodą.",
+          done: false,
+          id: 16,
+          code: 304306,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke ant vienos iš mašinų, ant kurio yra nuoroda. Nuorodoje rasite užduoties kodą.",
+          done: false,
+          id: 17,
+          code: 990507,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke ant vieno iš medžių kairiame įvažiavime, ant kurio yra nuoroda. Nuorodoje rasite užduoties kodą.",
+          done: false,
+          id: 18,
+          code: 375619,
+        },
+        {
+          task: "Paimkite lapą iš virtuvės, ant kurio yra matematinė užduotis. Užduoties kodą gausite išsprendę užduotį.",
+          done: false,
+          id: 19,
+          code: 526140,
+        },
+        {
+          task: "Paimkite lapą iš 8 kambario, ant kurio yra matematinė užduotis. Užduoties kodą gausite išsprendę užduotį.",
+          done: false,
+          id: 20,
+          code: 515255,
+        },
+        {
+          task: "Paimkite lapą iš 6 kambario, ant kurio yra matematinė užduotis. Užduoties kodą gausite išsprendę užduotį.",
+          done: false,
+          id: 21,
+          code: 171023,
+        },
+        {
+          task: "7 kambaryje rasite daug užverstų lapų. Atvertinėkite lapus, tol kol rasite ant vieno iš jų parašytą užduoties kodą. Nepamirškite įvykdę užduotį užversti lapų atgal.",
+          done: false,
+          id: 22,
+          code: 791335,
+        },
+        {
+          task: "5 kambaryje kabo lapas su QR kodu. Nuskaitykite QR kodą, kad gautumėte užduočiai užbaigti reikalingą kodą.",
+          done: false,
+          id: 23,
+          code: 841671,
+        },
+        {
+          task: "Raskite lapą 5 kambaryje, ant kurio yra nuoroda. Nuorodoje rasite užduoties kodą.",
+          done: false,
+          id: 24,
+          code: 746019,
+        },
+      ];
+      const mediumTasks3 = [
+        {
+          task: "Pasiimkite popieriaus lapą su jame esančiu testu iš 3 kambario ir su šalia esančiu tušinuku pažymėkite teisingus atsakymus teste. Kodas reikalingas išspręsti užduočiai - šalia teisingų variantų esantys skaičiai iš eilės. Išspręsta testą atiduokite kambaryje esančiam moderatoriui.",
+          done: false,
+          id: 25,
+          code: 655039,
+        },
+        {
+          task: "Apsirenkite šiltai. Pripūskite ir susprogdinkite balioną, kuris yra pririštas prie pavėsinės. Užduoties kodas - baliono viduje.",
+          done: false,
+          id: 26,
+          code: 899421,
+        },
+        {
+          task: "Sujunkite laidus pagal spalvas 2 kambaryje. Užduoties kodas - sudėkite mėlyno laido pradžios poziciją ir raudono laido pabaigos poziciją ir gautą skaičių pakelkite 9 laipsniu. Įvykdžius užduotį laidus atjunkite.",
+          done: false,
+          id: 27,
+          code: 262144,
+        },
+        {
+          task: "Sujunkite laidus pagal spalvas 4 kambaryje. Užduoties kodas - sudėkite geltono laido pradžios poziciją ir geltono laido pabaigos poziciją ir gautą skaičių pakelkite 7 laipsniu. Įvykdžius užduotį laidus atjunkite.",
+          done: false,
+          id: 28,
+          code: 279936,
+        },
+        {
+          task: "Sujunkite laidus pagal spalvas 5 kambaryje. Užduoties kodas - sudėkite rožinio laido pradžios poziciją ir mėlyno laido pabaigos poziciją ir gautą skaičių pakelkite 12 laipsniu. Įvykdžius užduotį laidus atjunkite.",
+          done: false,
+          id: 29,
+          code: 531441,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke prie dešiniojo įvažiavimo į sodybą ant vieno iš medžių kabo lapas su brailio raštu. Iššifruokite brailio raštu parašytus skaičius ir įveskite juos, kad užbaigtumėte užduotį.",
+          done: false,
+          id: 30,
+          code: 485736,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke prie pavesinės ant medžio kabo lapas su brailio raštu. Iššifruokite brailio raštu parašytus skaičius ir įveskite juos, kad užbaigtumėte užduotį.",
+          done: false,
+          id: 31,
+          code: 350737,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant vienos iš mašinų kabo lapas su brailio raštu. Iššifruokite brailio raštu parašytus skaičius ir įveskite juos, kad užbaigtumėte užduotį.",
+          done: false,
+          id: 32,
+          code: 606584,
+        },
+        {
+          task: "Raskite lapą su koordinatėmis pagrindinėje salėje ant sienos. Užduoties kodas - miestelio tose koordinatėse gyventojų skaičius (pagal Vikipediją) padauginta iš 188.",
+          done: false,
+          id: 33,
+          code: 394424,
+        },
+        {
+          task: "Raskite lapą su koordinatėmis antrame aukšte prie laiptų. Užduoties kodas - miestelio tose koordinatėse gyventojų skaičius (pagal Vikipediją) padauginta iš 1094.",
+          done: false,
+          id: 34,
+          code: 476984,
+        },
+        {
+          task: "Raskite lapą su koordinatėmis 5 kambario balkone. Užduoties kodas - miestelio tose koordinatėse gyventojų skaičius (pagal Vikipediją) padauginta iš 987.",
+          done: false,
+          id: 35,
+          code: 733341,
+        },
+        {
+          task: "Pasisverkite ant svarstyklių esančių 3 kambaryje ir užrasykite savo vardą bei svorį, kurį parodė svarstyklės lape esančiame prie svarstyklių. Atlikus užduotį, kodą gausite iš moderatoriaus.",
+          done: false,
+          id: 36,
+          code: 849024,
+        },
+        {
+          task: "Raskite paslėptą daiktą 2 kambaryje. Daiktas raudonos spalvos, labai lengvas ir iš plastiko. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 96489.",
+          done: false,
+          id: 37,
+          code: 578934,
+        },
+        {
+          task: "Raskite paslėptą daiktą virtuvėje. Daiktas žalios spalvos, šiltas ir minkštas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 54698.",
+          done: false,
+          id: 38,
+          code: 492282,
+        },
+        {
+          task: "Raskite paslėptą daiktą 8 kambaryje. Daiktas mėlynos spalvos, popierinis. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 87456.",
+          done: false,
+          id: 39,
+          code: 87456,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite paslėptą daiktą prie vienos iš mašinų. Daiktas raudonos spalvos, pailgas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 42013.",
+          done: false,
+          id: 40,
+          code: 252078,
+        },
+      ];
+      const hardTasks3 = [
+        {
+          task: "5 kambaryje ant sienos popieriaus lape rasite QR kodą, kuris jus nuves į vaizdo įrašą. Peržiūrėkite vaizdo įrašą ir raskite jame 6 skaičius, kurie ir bus užduoties kodas.",
+          done: false,
+          id: 41,
+          code: 790363,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant vienos iš mašinų kabo lapas su užkoduotu žodžiu. Šifras, kuriuo užkoduotas žodis, nurodytas lape. Iššifruokite žodį. Užduoties kodas - žodžio ilgis pakeltas 8 laipsniu.",
+          done: false,
+          id: 42,
+          code: 390625,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant namo sienos kabo lapas su užkoduotu žodžiu. Šifras, kuriuo užkoduotas žodis, nurodytas lape. Iššifruokite žodį. Užduoties kodas - žodžio ilgis pakeltas 5 laipsniu.",
+          done: false,
+          id: 43,
+          code: 161051,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant akmeninės šašlykinės kabo lapas su užkoduotu žodžiu. Šifras, kuriuo užkoduotas žodis, nurodytas lape. Iššifruokite žodį. Užduoties kodas - žodžio ilgis pakeltas 11 laipsniu.",
+          done: false,
+          id: 44,
+          code: 177147,
+        },
+        {
+          task: "Paimkite plastmasinį bliudelį iš 7 kambario ir nuneškite jį moderatoriui į virtuvę. Moderatorius jums į bliudelį įdės lapelį. Tuomet nuneškite bliudelį su lapeliu viduje moderatoriui į 3 kambarį. Kai moderatorius 3 kambaryje įdės jums dar vieną lapelį, nuneškite bliudelį su abiem lapeliais viduje moderatoriui į pagrindinę salę prie stalo, kur gausite užduoties kodą.",
+          done: false,
+          id: 45,
+          code: 719956,
+        },
+        {
+          task: "Atspėkite dainą grojančią 9 kambaryje. Užduoties kodas - dainos atlikėjo ilgis pakeltas 5 laipsniu.",
+          done: false,
+          id: 46,
+          code: 100000,
+        },
+        {
+          task: "Paimkite popieriaus lapą 6 kambaryje su jame esančiu labirintu ir jį išsprendę pristatykite moderatoriui pagrindinėje salėje prie stalo, kad gautumėte užduoties kodą.",
+          done: false,
+          id: 47,
+          code: 659504,
+        },
+        {
+          task: "Pasiimkite popieriaus lapą su jame esančiu testu iš virtuvės ir su šalia esančiu tušinuku pažymėkite teisingus atsakymus teste. Kodas reikalingas išspręsti užduočiai - šalia teisingų variantų esantys skaičiai iš eilės. Išspręsta testą atiduokite kambaryje esančiam moderatoriui.",
+          done: false,
+          id: 48,
+          code: 285597,
+        },
+      ];
+      const easyTasks4 = [
+        {
+          task: "Pasiimkite popieriaus lapą su siluetu iš 1 kambario ir su šalia esančiais pieštukais užspalvinkite siluetą, panaudodami bent 2 skirtingų spalvų pieštukus. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite užspalvintą siluetą moderatoriui esančiam pagrindinėje salėje prie stalo.",
+          done: false,
+          id: 1,
+          code: 937722,
+        },
+        {
+          task: "Pasiimkite popieriaus lapą su siluetu iš 4 kambario ir su šalia esančiomis žirklėmis iškirpkite popieriuje esantį siluetą. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite iškirptą siluetą moderatoriui esančiam virtuvėje.",
+          done: false,
+          id: 2,
+          code: 497152,
+        },
+        {
+          task: "Pasiimkite tuščią popieriaus lapą iš 2 kambario ir su šalia esančiu tušinuku užrašykite visą lietuvišką abėcelę. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite lapą su jame užrašyta abėcele moderatoriui esančiam 3 kambaryje.",
+          done: false,
+          id: 3,
+          code: 648438,
+        },
+        {
+          task: "Pasiimkite tuščią popieriaus lapą iš 2 kambario ir su šalia esančiu tušinuku apipieškite savo kairę ranką. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite lapą su jame apibrėžta jūsų kaire ranka moderatoriui esančiam virtuvėje.",
+          done: false,
+          id: 4,
+          code: 409546,
+        },
+        {
+          task: "Pasiimkite tuščią popieriaus lapą iš 2 kambario ir išlankstykite iš jo lėktuvėlį. Norint gauti kodą reikalingą užbaigti šiai užduočiai, pristatykite išlankstytą lėktuvėlį moderatoriui esančiam pagrindinėje salėje prie stalo.",
+          done: false,
+          id: 5,
+          code: 897065,
+        },
+        {
+          task: "Įmeskite kauliuką į puodelį virtuvėje iš 2 metrų atstumo. Įvykdžius užduotį kodą reikalingą užduočiai užbaigti jums duos moderatorius.",
+          done: false,
+          id: 6,
+          code: 935744,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant įėjimo durų kabo lapas su QR kodu. Nuskaitykite QR kodą, kad gautumėte užduočiai užbaigti reikalingą kodą.",
+          done: false,
+          id: 7,
+          code: 996364,
+        },
+        {
+          task: "Viduje prie išėjimo kabo lapas su QR kodu. Nuskaitykite QR kodą, kad gautumėte užduočiai užbaigti reikalingą kodą.",
+          done: false,
+          id: 8,
+          code: 226305,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant suoliuko prie šašlykinės guli lapas su QR kodu. Nuskaitykite QR kodą, kad gautumėte užduočiai užbaigti reikalingą kodą.",
+          done: false,
+          id: 9,
+          code: 843459,
+        },
+        {
+          task: "Raskite lapą 7 kambaryje su nuoroda failo atsisiuntimui. Užduoties kodą rasite atsisiuntę ir atidarę failą.",
+          done: false,
+          id: 10,
+          code: 942599,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke prie kairiojo įvažiavimo ant medžio su nuoroda failo atsisiuntimui. Užduoties kodą rasite atsisiuntę ir atidarę failą.",
+          done: false,
+          id: 11,
+          code: 818088,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke ant medžio, esančio prie pastato, su nuoroda failo atsisiuntimui. Užduoties kodą rasite atsisiuntę ir atidarę failą.",
+          done: false,
+          id: 12,
+          code: 961767,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite paslėptą puodelį pavėsinėje, ant kurio yra užklijuotas užduoties kodas.",
+          done: false,
+          id: 13,
+          code: 918217,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite paslėptą puodelį lauke prie pastato, ant kurio yra užklijuotas užduoties kodas.",
+          done: false,
+          id: 14,
+          code: 895446,
+        },
+        {
+          task: "Raskite paslėptą puodelį 9 kambaryje, ant kurio yra užklijuotas užduoties kodas.",
+          done: false,
+          id: 15,
+          code: 774747,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke ant pastato, ant kurio yra nuoroda. Nuorodoje rasite užduoties kodą.",
+          done: false,
+          id: 16,
+          code: 304306,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke ant vienos iš mašinų, ant kurio yra nuoroda. Nuorodoje rasite užduoties kodą.",
+          done: false,
+          id: 17,
+          code: 990507,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite lapą lauke ant vieno iš medžių kairiame įvažiavime, ant kurio yra nuoroda. Nuorodoje rasite užduoties kodą.",
+          done: false,
+          id: 18,
+          code: 375619,
+        },
+        {
+          task: "Paimkite lapą iš virtuvės, ant kurio yra matematinė užduotis. Užduoties kodą gausite išsprendę užduotį.",
+          done: false,
+          id: 19,
+          code: 526140,
+        },
+        {
+          task: "Paimkite lapą iš 8 kambario, ant kurio yra matematinė užduotis. Užduoties kodą gausite išsprendę užduotį.",
+          done: false,
+          id: 20,
+          code: 515255,
+        },
+        {
+          task: "Paimkite lapą iš 6 kambario, ant kurio yra matematinė užduotis. Užduoties kodą gausite išsprendę užduotį.",
+          done: false,
+          id: 21,
+          code: 171023,
+        },
+        {
+          task: "7 kambaryje rasite daug užverstų lapų. Atvertinėkite lapus, tol kol rasite ant vieno iš jų parašytą užduoties kodą. Nepamirškite įvykdę užduotį užversti lapų atgal.",
+          done: false,
+          id: 22,
+          code: 791335,
+        },
+        {
+          task: "5 kambaryje kabo lapas su QR kodu. Nuskaitykite QR kodą, kad gautumėte užduočiai užbaigti reikalingą kodą.",
+          done: false,
+          id: 23,
+          code: 841671,
+        },
+        {
+          task: "Raskite lapą 5 kambaryje, ant kurio yra nuoroda. Nuorodoje rasite užduoties kodą.",
+          done: false,
+          id: 24,
+          code: 746019,
+        },
+      ];
+      const mediumTasks4 = [
+        {
+          task: "Pasiimkite popieriaus lapą su jame esančiu testu iš 3 kambario ir su šalia esančiu tušinuku pažymėkite teisingus atsakymus teste. Kodas reikalingas išspręsti užduočiai - šalia teisingų variantų esantys skaičiai iš eilės. Išspręsta testą atiduokite kambaryje esančiam moderatoriui.",
+          done: false,
+          id: 25,
+          code: 655039,
+        },
+        {
+          task: "Apsirenkite šiltai. Pripūskite ir susprogdinkite balioną, kuris yra pririštas prie pavėsinės. Užduoties kodas - baliono viduje.",
+          done: false,
+          id: 26,
+          code: 899421,
+        },
+        {
+          task: "Sujunkite laidus pagal spalvas 2 kambaryje. Užduoties kodas - sudėkite mėlyno laido pradžios poziciją ir raudono laido pabaigos poziciją ir gautą skaičių pakelkite 9 laipsniu. Įvykdžius užduotį laidus atjunkite.",
+          done: false,
+          id: 27,
+          code: 262144,
+        },
+        {
+          task: "Sujunkite laidus pagal spalvas 4 kambaryje. Užduoties kodas - sudėkite geltono laido pradžios poziciją ir geltono laido pabaigos poziciją ir gautą skaičių pakelkite 7 laipsniu. Įvykdžius užduotį laidus atjunkite.",
+          done: false,
+          id: 28,
+          code: 279936,
+        },
+        {
+          task: "Sujunkite laidus pagal spalvas 5 kambaryje. Užduoties kodas - sudėkite rožinio laido pradžios poziciją ir mėlyno laido pabaigos poziciją ir gautą skaičių pakelkite 12 laipsniu. Įvykdžius užduotį laidus atjunkite.",
+          done: false,
+          id: 29,
+          code: 531441,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke prie dešiniojo įvažiavimo į sodybą ant vieno iš medžių kabo lapas su brailio raštu. Iššifruokite brailio raštu parašytus skaičius ir įveskite juos, kad užbaigtumėte užduotį.",
+          done: false,
+          id: 30,
+          code: 485736,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke prie pavesinės ant medžio kabo lapas su brailio raštu. Iššifruokite brailio raštu parašytus skaičius ir įveskite juos, kad užbaigtumėte užduotį.",
+          done: false,
+          id: 31,
+          code: 350737,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant vienos iš mašinų kabo lapas su brailio raštu. Iššifruokite brailio raštu parašytus skaičius ir įveskite juos, kad užbaigtumėte užduotį.",
+          done: false,
+          id: 32,
+          code: 606584,
+        },
+        {
+          task: "Raskite lapą su koordinatėmis pagrindinėje salėje ant sienos. Užduoties kodas - miestelio tose koordinatėse gyventojų skaičius (pagal Vikipediją) padauginta iš 188.",
+          done: false,
+          id: 33,
+          code: 394424,
+        },
+        {
+          task: "Raskite lapą su koordinatėmis antrame aukšte prie laiptų. Užduoties kodas - miestelio tose koordinatėse gyventojų skaičius (pagal Vikipediją) padauginta iš 1094.",
+          done: false,
+          id: 34,
+          code: 476984,
+        },
+        {
+          task: "Raskite lapą su koordinatėmis 5 kambario balkone. Užduoties kodas - miestelio tose koordinatėse gyventojų skaičius (pagal Vikipediją) padauginta iš 987.",
+          done: false,
+          id: 35,
+          code: 733341,
+        },
+        {
+          task: "Pasisverkite ant svarstyklių esančių 3 kambaryje ir užrasykite savo vardą bei svorį, kurį parodė svarstyklės lape esančiame prie svarstyklių. Atlikus užduotį, kodą gausite iš moderatoriaus.",
+          done: false,
+          id: 36,
+          code: 849024,
+        },
+        {
+          task: "Raskite paslėptą daiktą 2 kambaryje. Daiktas raudonos spalvos, labai lengvas ir iš plastiko. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 96489.",
+          done: false,
+          id: 37,
+          code: 578934,
+        },
+        {
+          task: "Raskite paslėptą daiktą virtuvėje. Daiktas žalios spalvos, šiltas ir minkštas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 54698.",
+          done: false,
+          id: 38,
+          code: 492282,
+        },
+        {
+          task: "Raskite paslėptą daiktą 8 kambaryje. Daiktas mėlynos spalvos, popierinis. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 87456.",
+          done: false,
+          id: 39,
+          code: 87456,
+        },
+        {
+          task: "Apsirenkite šiltai. Raskite paslėptą daiktą prie vienos iš mašinų. Daiktas raudonos spalvos, pailgas. Užduoties kodas - daikto pavadinimo ilgis padagintas iš 42013.",
+          done: false,
+          id: 40,
+          code: 252078,
+        },
+      ];
+      const hardTasks4 = [
+        {
+          task: "5 kambaryje ant sienos popieriaus lape rasite QR kodą, kuris jus nuves į vaizdo įrašą. Peržiūrėkite vaizdo įrašą ir raskite jame 6 skaičius, kurie ir bus užduoties kodas.",
+          done: false,
+          id: 41,
+          code: 790363,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant vienos iš mašinų kabo lapas su užkoduotu žodžiu. Šifras, kuriuo užkoduotas žodis, nurodytas lape. Iššifruokite žodį. Užduoties kodas - žodžio ilgis pakeltas 8 laipsniu.",
+          done: false,
+          id: 42,
+          code: 390625,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant namo sienos kabo lapas su užkoduotu žodžiu. Šifras, kuriuo užkoduotas žodis, nurodytas lape. Iššifruokite žodį. Užduoties kodas - žodžio ilgis pakeltas 5 laipsniu.",
+          done: false,
+          id: 43,
+          code: 161051,
+        },
+        {
+          task: "Apsirenkite šiltai. Lauke ant akmeninės šašlykinės kabo lapas su užkoduotu žodžiu. Šifras, kuriuo užkoduotas žodis, nurodytas lape. Iššifruokite žodį. Užduoties kodas - žodžio ilgis pakeltas 11 laipsniu.",
+          done: false,
+          id: 44,
+          code: 177147,
+        },
+        {
+          task: "Paimkite plastmasinį bliudelį iš 7 kambario ir nuneškite jį moderatoriui į virtuvę. Moderatorius jums į bliudelį įdės lapelį. Tuomet nuneškite bliudelį su lapeliu viduje moderatoriui į 3 kambarį. Kai moderatorius 3 kambaryje įdės jums dar vieną lapelį, nuneškite bliudelį su abiem lapeliais viduje moderatoriui į pagrindinę salę prie stalo, kur gausite užduoties kodą.",
+          done: false,
+          id: 45,
+          code: 719956,
+        },
+        {
+          task: "Atspėkite dainą grojančią 9 kambaryje. Užduoties kodas - dainos atlikėjo ilgis pakeltas 5 laipsniu.",
+          done: false,
+          id: 46,
+          code: 100000,
+        },
+        {
+          task: "Paimkite popieriaus lapą 6 kambaryje su jame esančiu labirintu ir jį išsprendę pristatykite moderatoriui pagrindinėje salėje prie stalo, kad gautumėte užduoties kodą.",
+          done: false,
+          id: 47,
+          code: 659504,
+        },
+        {
+          task: "Pasiimkite popieriaus lapą su jame esančiu testu iš virtuvės ir su šalia esančiu tušinuku pažymėkite teisingus atsakymus teste. Kodas reikalingas išspręsti užduočiai - šalia teisingų variantų esantys skaičiai iš eilės. Išspręsta testą atiduokite kambaryje esančiam moderatoriui.",
+          done: false,
+          id: 48,
+          code: 285597,
+        },
+      ];
       const shuffledEasyTasks1 = easyTasks.sort(() => 0.5 - Math.random());
       const shuffledMediumTasks1 = mediumTasks.sort(() => 0.5 - Math.random());
       const shuffledHardTasks1 = hardTasks.sort(() => 0.5 - Math.random());
-      const shuffledEasyTasks2 = easyTasks.sort(() => 0.5 - Math.random());
-      const shuffledMediumTasks2 = mediumTasks.sort(() => 0.5 - Math.random());
-      const shuffledHardTasks2 = hardTasks.sort(() => 0.5 - Math.random());
-      const shuffledEasyTasks3 = easyTasks.sort(() => 0.5 - Math.random());
-      const shuffledMediumTasks3 = mediumTasks.sort(() => 0.5 - Math.random());
-      const shuffledHardTasks3 = hardTasks.sort(() => 0.5 - Math.random());
-      const shuffledEasyTasks4 = easyTasks.sort(() => 0.5 - Math.random());
-      const shuffledMediumTasks4 = mediumTasks.sort(() => 0.5 - Math.random());
-      const shuffledHardTasks4 = hardTasks.sort(() => 0.5 - Math.random());
+      const shuffledEasyTasks2 = easyTasks2.sort(() => 0.5 - Math.random());
+      const shuffledMediumTasks2 = mediumTasks2.sort(() => 0.5 - Math.random());
+      const shuffledHardTasks2 = hardTasks2.sort(() => 0.5 - Math.random());
+      const shuffledEasyTasks3 = easyTasks3.sort(() => 0.5 - Math.random());
+      const shuffledMediumTasks3 = mediumTasks3.sort(() => 0.5 - Math.random());
+      const shuffledHardTasks3 = hardTasks3.sort(() => 0.5 - Math.random());
+      const shuffledEasyTasks4 = easyTasks4.sort(() => 0.5 - Math.random());
+      const shuffledMediumTasks4 = mediumTasks4.sort(() => 0.5 - Math.random());
+      const shuffledHardTasks4 = hardTasks4.sort(() => 0.5 - Math.random());
       var tasksLeft1 = 8;
       var tasksLeft2 = 8;
       var tasksLeft3 = 8;
       const allPlayers = await playersRef.get();
       var imposters = impostersCount;
       allPlayers.forEach((doc) => {
-        batch.update(allPlayersRef.doc(doc.id), {
-          inGame: doc.data().ready,
-          imposters: impostersCount,
-          isDead: false,
-          killedBy: "",
-          reportedBy: "",
-          isReported: false,
-          isMeetingStarting: false,
-          isMeetingStarted: false,
-          meetingCooldownEndsAt: Date.now() + 60000,
-          isSabotaged: false,
-          sabotageType: "",
-          sabotageEndsAt: Date.now(),
-          isOxygenFirstDone: false,
-          isOxygenSecondDone: false,
-          isCommsDone: false,
-          oxygenFirstCode: 661084,
-          oxygenSecondCode: 604902,
-          commsCode: 824411,
-          sabotageCooldownEndsAt: Date.now() + 60000,
-          screenHidden: false,
-          win: "",
-          gamePaused: false,
-          role:
-            doc.data().role === "admin"
-              ? "admin"
-              : imposters > 0
-              ? "imposter"
-              : "crewmate",
-          easyTasks:
-            tasksLeft1 > 0
-              ? shuffledEasyTasks1.slice(0, 3)
-              : tasksLeft2 > 0
-              ? shuffledEasyTasks2.slice(0, 3)
-              : tasksLeft3 > 0
-              ? shuffledEasyTasks3.slice(0, 3)
-              : shuffledEasyTasks4.slice(0, 3),
-          mediumTasks:
-            tasksLeft1 > 0
-              ? shuffledMediumTasks1.slice(0, 2)
-              : tasksLeft2 > 0
-              ? shuffledMediumTasks2.slice(0, 2)
-              : tasksLeft3 > 0
-              ? shuffledMediumTasks3.slice(0, 2)
-              : shuffledMediumTasks4.slice(0, 2),
-          hardTasks:
-            tasksLeft1 > 0
-              ? shuffledHardTasks1.slice(0, 1)
-              : tasksLeft2 > 0
-              ? shuffledHardTasks2.slice(0, 1)
-              : tasksLeft3 > 0
-              ? shuffledHardTasks3.slice(0, 1)
-              : shuffledHardTasks4.slice(0, 1),
-          doneTasks: 0,
-          cooldownEndsAt: Date.now() + 180000,
-        });
-        console.log(
-          tasksLeft1 > 0
-            ? shuffledEasyTasks1.slice(0, 3)
-            : tasksLeft2 > 0
-            ? shuffledEasyTasks2.slice(0, 3)
-            : tasksLeft3 > 0
-            ? shuffledEasyTasks3.slice(0, 3)
-            : shuffledEasyTasks4.slice(0, 3)
-        );
+        if (tasksLeft1 > 0) {
+          batch.update(allPlayersRef.doc(doc.id), {
+            inGame: doc.data().ready,
+            imposters: impostersCount,
+            isDead: false,
+            killedBy: "",
+            reportedBy: "",
+            isReported: false,
+            isMeetingStarting: false,
+            isMeetingStarted: false,
+            meetingCooldownEndsAt: Date.now() + 60000,
+            isSabotaged: false,
+            sabotageType: "",
+            sabotageEndsAt: Date.now(),
+            isOxygenFirstDone: false,
+            isOxygenSecondDone: false,
+            isCommsDone: false,
+            oxygenFirstCode: 661084,
+            oxygenSecondCode: 604902,
+            commsCode: 824411,
+            sabotageCooldownEndsAt: Date.now() + 60000,
+            screenHidden: false,
+            win: "",
+            gamePaused: false,
+            role:
+              doc.data().role === "admin"
+                ? "admin"
+                : imposters > 0
+                ? "imposter"
+                : "crewmate",
+            easyTasks: shuffledEasyTasks1.slice(0, 3),
+            mediumTasks: shuffledMediumTasks1.slice(0, 2),
+            hardTasks: shuffledHardTasks1.slice(0, 1),
+            doneTasks: 0,
+            cooldownEndsAt: Date.now() + 180000,
+          });
+        } else if (tasksLeft2 > 0) {
+          batch.update(allPlayersRef.doc(doc.id), {
+            inGame: doc.data().ready,
+            imposters: impostersCount,
+            isDead: false,
+            killedBy: "",
+            reportedBy: "",
+            isReported: false,
+            isMeetingStarting: false,
+            isMeetingStarted: false,
+            meetingCooldownEndsAt: Date.now() + 60000,
+            isSabotaged: false,
+            sabotageType: "",
+            sabotageEndsAt: Date.now(),
+            isOxygenFirstDone: false,
+            isOxygenSecondDone: false,
+            isCommsDone: false,
+            oxygenFirstCode: 661084,
+            oxygenSecondCode: 604902,
+            commsCode: 824411,
+            sabotageCooldownEndsAt: Date.now() + 60000,
+            screenHidden: false,
+            win: "",
+            gamePaused: false,
+            role:
+              doc.data().role === "admin"
+                ? "admin"
+                : imposters > 0
+                ? "imposter"
+                : "crewmate",
+            easyTasks: shuffledEasyTasks2.slice(0, 3),
+            mediumTasks: shuffledMediumTasks2.slice(0, 2),
+            hardTasks: shuffledHardTasks2.slice(0, 1),
+            doneTasks: 0,
+            cooldownEndsAt: Date.now() + 180000,
+          });
+        } else if (tasksLeft3 > 0) {
+          batch.update(allPlayersRef.doc(doc.id), {
+            inGame: doc.data().ready,
+            imposters: impostersCount,
+            isDead: false,
+            killedBy: "",
+            reportedBy: "",
+            isReported: false,
+            isMeetingStarting: false,
+            isMeetingStarted: false,
+            meetingCooldownEndsAt: Date.now() + 60000,
+            isSabotaged: false,
+            sabotageType: "",
+            sabotageEndsAt: Date.now(),
+            isOxygenFirstDone: false,
+            isOxygenSecondDone: false,
+            isCommsDone: false,
+            oxygenFirstCode: 661084,
+            oxygenSecondCode: 604902,
+            commsCode: 824411,
+            sabotageCooldownEndsAt: Date.now() + 60000,
+            screenHidden: false,
+            win: "",
+            gamePaused: false,
+            role:
+              doc.data().role === "admin"
+                ? "admin"
+                : imposters > 0
+                ? "imposter"
+                : "crewmate",
+            easyTasks: shuffledEasyTasks3.slice(0, 3),
+            mediumTasks: shuffledMediumTasks3.slice(0, 2),
+            hardTasks: shuffledHardTasks3.slice(0, 1),
+            doneTasks: 0,
+            cooldownEndsAt: Date.now() + 180000,
+          });
+        } else {
+          batch.update(allPlayersRef.doc(doc.id), {
+            inGame: doc.data().ready,
+            imposters: impostersCount,
+            isDead: false,
+            killedBy: "",
+            reportedBy: "",
+            isReported: false,
+            isMeetingStarting: false,
+            isMeetingStarted: false,
+            meetingCooldownEndsAt: Date.now() + 60000,
+            isSabotaged: false,
+            sabotageType: "",
+            sabotageEndsAt: Date.now(),
+            isOxygenFirstDone: false,
+            isOxygenSecondDone: false,
+            isCommsDone: false,
+            oxygenFirstCode: 661084,
+            oxygenSecondCode: 604902,
+            commsCode: 824411,
+            sabotageCooldownEndsAt: Date.now() + 60000,
+            screenHidden: false,
+            win: "",
+            gamePaused: false,
+            role:
+              doc.data().role === "admin"
+                ? "admin"
+                : imposters > 0
+                ? "imposter"
+                : "crewmate",
+            easyTasks: shuffledEasyTasks4.slice(0, 3),
+            mediumTasks: shuffledMediumTasks4.slice(0, 2),
+            hardTasks: shuffledHardTasks4.slice(0, 1),
+            doneTasks: 0,
+            cooldownEndsAt: Date.now() + 180000,
+          });
+        }
         if (tasksLeft1 > 0) {
           shuffledEasyTasks1.splice(0, 3);
           shuffledMediumTasks1.splice(0, 2);
@@ -1135,6 +2095,11 @@ function GameWaitingRoom() {
     setGamePaused(true);
   };
   const startMeeting = async () => {
+    const deadCrewmatesRef = firestore
+      .collection("players")
+      .where("role", "==", "crewmate")
+      .where("isDead", "==", true)
+      .where("isReported", "==", false);
     const batch = firestore.batch();
     const allPlayers = await playersRef.get();
     allPlayers.forEach((doc) => {
@@ -1143,6 +2108,14 @@ function GameWaitingRoom() {
         isMeetingStarted: true,
       });
     });
+    const deadCrewmates = await deadCrewmatesRef.get();
+    const deadCrewmatesBatch = firestore.batch();
+    deadCrewmates.forEach((doc) => {
+      deadCrewmatesBatch.update(allPlayersRef.doc(doc.id), {
+        isReported: true,
+      });
+    });
+    await deadCrewmatesBatch.commit();
     await batch.commit();
     setMeetingStarting(false);
     setMeetingStarted(true);
@@ -1572,7 +2545,6 @@ function GameWaitingRoom() {
               <Modal
                 isOpen={isMeetingStartPlayerOpen}
                 onClose={onMeetingStartPlayerClose}
-                size="full"
               >
                 <ModalOverlay />
                 <ModalContent>
@@ -1621,11 +2593,7 @@ function GameWaitingRoom() {
                     )
                   : "Sabotažas"}
               </Button>
-              <Modal
-                isOpen={isSabotageOpen}
-                onClose={onSabotageClose}
-                size="full"
-              >
+              <Modal isOpen={isSabotageOpen} onClose={onSabotageClose}>
                 <ModalOverlay />
                 <ModalContent>
                   <ModalHeader>Sabotažas</ModalHeader>

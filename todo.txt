@@ -21,8 +21,8 @@ netikrint asmeniniu daiktu
 
 todo:
 resetgame - nuimti komentara nuo ready
+random number kad isrinkt imposterius
+adminam rodyt emergency tasks
+meetinge rodyt zaideju sarasa su naujais mirusiais
 
-galima pranesti apie mirusi zaideja po meeting
-ne visiem duoda uzduotis
 diskvalifikavus tikrint laimejima
-nesibaigia sabotage ivedus koda
