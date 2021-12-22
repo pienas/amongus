@@ -1448,6 +1448,33 @@ function GameWaitingRoom() {
                   </ModalFooter>
                 </ModalContent>
               </Modal>
+              <Button
+                mt={4}
+                colorScheme="gray"
+                isLoading={gameResetting}
+                onClick={onResetGameOpen}
+                width="100%"
+              >
+                Pradėti žaidimą iš naujo
+              </Button>
+              <Modal isOpen={isResetGameOpen} onClose={onResetGameClose}>
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>Pradėti žaidimą iš naujo</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    Ar tikrai norite pradėti žaidimą iš naujo?
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button colorScheme="green" mr={3} onClick={resetGame}>
+                      Patvirtinti
+                    </Button>
+                    <Button variant="ghost" onClick={onResetGameClose}>
+                      Atšaukti
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
             </>
           )}
         </Flex>
@@ -1510,6 +1537,33 @@ function GameWaitingRoom() {
                       Patvirtinti
                     </Button>
                     <Button variant="ghost" onClick={onResetImpostersWinClose}>
+                      Atšaukti
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
+              <Button
+                mt={4}
+                colorScheme="gray"
+                isLoading={gameResetting}
+                onClick={onResetGameOpen}
+                width="100%"
+              >
+                Pradėti žaidimą iš naujo
+              </Button>
+              <Modal isOpen={isResetGameOpen} onClose={onResetGameClose}>
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>Pradėti žaidimą iš naujo</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    Ar tikrai norite pradėti žaidimą iš naujo?
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button colorScheme="green" mr={3} onClick={resetGame}>
+                      Patvirtinti
+                    </Button>
+                    <Button variant="ghost" onClick={onResetGameClose}>
                       Atšaukti
                     </Button>
                   </ModalFooter>
