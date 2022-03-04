@@ -335,7 +335,7 @@ function GameWaitingRoom() {
     const interval = setInterval(
       () =>
         setSabotageCooldownEndsAt(
-          currentPlayer.sabotageCooldownEndsAt
+          currentPlayer
             ? currentPlayer.sabotageCooldownEndsAt - Date.now()
             : Date.now()
         ),
@@ -349,7 +349,7 @@ function GameWaitingRoom() {
     const interval = setInterval(
       () =>
         setMeetingCooldown(
-          currentPlayer.meetingCooldownEndsAt
+          currentPlayer
             ? currentPlayer.meetingCooldownEndsAt - Date.now()
             : Date.now()
         ),
@@ -377,9 +377,7 @@ function GameWaitingRoom() {
         setImpostersWin(true);
       }
       setGameSabotageEndsAt(
-        currentPlayer.sabotageEndsAt
-          ? currentPlayer.sabotageEndsAt - Date.now()
-          : Date.now()
+        currentPlayer ? currentPlayer.sabotageEndsAt - Date.now() : Date.now()
       );
     }, 1000);
     return () => {
@@ -1207,11 +1205,12 @@ function GameWaitingRoom() {
               if (currentPlayerIndex !== index)
                 return (
                   <Player
-                    key={player.id}
+                    key={player.uid}
                     info={player}
                     isAdmin={isCurrentPlayerAdmin}
                   />
                 );
+              return <></>;
             })}
           {isCurrentPlayerAdmin && (
             <>
@@ -1352,13 +1351,14 @@ function GameWaitingRoom() {
                 if (player.role !== "admin")
                   return (
                     <PlayerInGameInMeeting
-                      key={player.id}
+                      key={player.uid}
                       info={player}
                       setWinImposters={setWinImposters}
                       setWinCrewmates={setWinCrewmates}
                       isAdmin={isCurrentPlayerAdmin}
                     />
                   );
+              return <></>;
             })}
           {isCurrentPlayerAdmin && (
             <>
@@ -1412,7 +1412,12 @@ function GameWaitingRoom() {
             Apsimetėliais buvo:
           </Text>
           {imposters?.map((imposter: any) => (
-            <Text color="red.900" fontSize="30px" textAlign="center">
+            <Text
+              color="red.900"
+              fontSize="30px"
+              textAlign="center"
+              key={imposter.uid}
+            >
               {imposter.name}
             </Text>
           ))}
@@ -1506,7 +1511,12 @@ function GameWaitingRoom() {
             Apsimetėliais buvo:
           </Text>
           {imposters?.map((imposter: any) => (
-            <Text color="white" fontSize="30px" textAlign="center">
+            <Text
+              color="white"
+              fontSize="30px"
+              textAlign="center"
+              key={imposter.uid}
+            >
               {imposter.name}
             </Text>
           ))}
@@ -2759,7 +2769,7 @@ function GameWaitingRoom() {
                 if (player.role !== "admin")
                   return (
                     <PlayerInGame
-                      key={player.id}
+                      key={player.uid}
                       info={player}
                       setWinImposters={setWinImposters}
                       setWinCrewmates={setWinCrewmates}
@@ -2767,6 +2777,7 @@ function GameWaitingRoom() {
                       isAdmin={isCurrentPlayerAdmin}
                     />
                   );
+              return <></>;
             })}
           {isCurrentPlayerAdmin && (
             <>
